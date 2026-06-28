@@ -18,3 +18,14 @@ Implement real game state progression, persistence seeding from `StarterDecks.js
 - Ran static syntax parsing with `find Sources -name "*.swift" | xargs swiftc -parse`; the check passed in this environment.
 - Tried `xcodebuild -version`; `xcodebuild` is unavailable in this Linux environment (`command not found`).
 - Reviewed Swift source and test files for obvious compile issues such as missing imports, undefined symbols, and visible type mismatches; no fixable source compile errors were found from Linux-accessible static analysis.
+
+## 2026-06-28 - Task 2D Xcode validation environment check
+- Mandatory environment check result: **failed** before any source edits.
+- Host OS check: `uname -a` reported Linux (`Linux a0ac43a0983a 6.12.47 ... x86_64 GNU/Linux`), not macOS.
+- macOS/Xcode check: `sw_vers` is unavailable in this container.
+- Xcode CLI check: `xcodebuild -version` failed with `command not found`.
+- iOS Simulator runtime check: `xcrun simctl list runtimes` failed with `xcrun: command not found`.
+- Xcode project build/open check: blocked because Xcode and `xcodebuild` are unavailable.
+- Required build command `xcodebuild -scheme PocketPartyCourt -destination 'platform=iOS Simulator,name=iPhone 16' build` was not run because the mandatory macOS/Xcode gate failed.
+- Required test command `xcodebuild -scheme PocketPartyCourt -destination 'platform=iOS Simulator,name=iPhone 16' test` was not run because the mandatory macOS/Xcode gate failed.
+- No application source files were changed. Task 2D cannot be completed in this environment; it must be rerun on a macOS host with Xcode and an available iOS simulator runtime.
