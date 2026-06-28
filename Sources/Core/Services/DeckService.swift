@@ -19,37 +19,80 @@ struct StarterDeckCatalog: Codable {
     let decks: [StarterDeckDTO]
 }
 
-final class DeckService {
-    func loadStarterDecks() -> [StarterDeckDTO] {
-        guard let url = Bundle.main.url(forResource: "StarterDecks", withExtension: "json"),
-              let data = try? Data(contentsOf: url),
-              let catalog = try? JSONDecoder().decode(StarterDeckCatalog.self, from: data) else {
-            return []
+enum DeckServiceError: LocalizedError {
+    case missingStarterDeckResource
+
+    var errorDescription: String? {
+        switch self {
+        case .missingStarterDeckResource:
+            return "StarterDecks.json could not be found in the app bundle."
         }
-        return catalog.decks
+    }
+}
+
+final class DeckService {
+    func loadStarterDecks() throws -> [StarterDeckDTO] {
+        guard let url = Bundle.main.url(forResource: "StarterDecks", withExtension: "json") else {
+            throw DeckServiceError.missingStarterDeckResource
+        }
+        return try loadStarterDecks(from: url)
+    }
+
+    func loadStarterDecks(from url: URL) throws -> [StarterDeckDTO] {
+        let data = try Data(contentsOf: url)
+        return try decodeStarterDecks(from: data)
+    }
+
+    func decodeStarterDecks(from data: Data) throws -> [StarterDeckDTO] {
+        try JSONDecoder().decode(StarterDeckCatalog.self, from: data).decks
     }
 
     @MainActor
     func seedStarterDecksIfNeeded(in context: ModelContext) throws {
-        var descriptor = FetchDescriptor<CaseDeck>()
-        descriptor.fetchLimit = 1
+        try seedStarterDecks(loadStarterDecks(), in: context)
+    }
 
-        guard try context.fetch(descriptor).isEmpty else { return }
+    @MainActor
+    func seedStarterDecks(_ starterDecks: [StarterDeckDTO], in context: ModelContext) throws {
+        var didInsert = false
 
-        for starterDeck in loadStarterDecks() {
-            let cases = starterDeck.cases.map { starterCase in
-                GameCase(prompt: starterCase.prompt, category: starterCase.category)
-            }
-            context.insert(
-                CaseDeck(
+        for starterDeck in starterDecks {
+            let deck: CaseDeck
+            if let existingDeck = try existingDeck(id: starterDeck.id, in: context) {
+                deck = existingDeck
+            } else {
+                deck = CaseDeck(
+                    id: starterDeck.id,
                     title: starterDeck.title,
                     deckDescription: starterDeck.description,
-                    icon: starterDeck.icon,
-                    cases: cases
+                    icon: starterDeck.icon
                 )
-            )
+                context.insert(deck)
+                didInsert = true
+            }
+
+            for starterCase in starterDeck.cases where try existingCase(id: starterCase.id, in: context) == nil {
+                deck.cases.append(GameCase(id: starterCase.id, prompt: starterCase.prompt, category: starterCase.category))
+                didInsert = true
+            }
         }
 
-        try context.save()
+        if didInsert {
+            try context.save()
+        }
+    }
+
+    @MainActor
+    private func existingDeck(id: String, in context: ModelContext) throws -> CaseDeck? {
+        var descriptor = FetchDescriptor<CaseDeck>(predicate: #Predicate { $0.id == id })
+        descriptor.fetchLimit = 1
+        return try context.fetch(descriptor).first
+    }
+
+    @MainActor
+    private func existingCase(id: String, in context: ModelContext) throws -> GameCase? {
+        var descriptor = FetchDescriptor<GameCase>(predicate: #Predicate { $0.id == id })
+        descriptor.fetchLimit = 1
+        return try context.fetch(descriptor).first
     }
 }

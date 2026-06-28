@@ -72,7 +72,12 @@ struct GameSetupView: View {
 
             Section {
                 Button("Reveal First Case") {
+                    AnalyticsService.shared.track(.deckSelected)
+                    AnalyticsService.shared.track(.gameStarted)
                     selectedCase = deck.cases.randomElement() ?? deck.cases.first
+                    if selectedCase != nil {
+                        AnalyticsService.shared.track(.caseDrawn)
+                    }
                 }
                 .disabled(validationMessage != nil || deck.cases.isEmpty)
             }

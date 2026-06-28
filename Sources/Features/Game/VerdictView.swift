@@ -65,6 +65,9 @@ struct VerdictView: View {
             .padding()
         }
         .navigationTitle("Verdict")
+        .onAppear {
+            AnalyticsService.shared.track(.verdictGenerated)
+        }
         .task {
             if !didSaveSession {
                 saveCompletedSession()
@@ -90,6 +93,7 @@ struct VerdictView: View {
         )
         modelContext.insert(session)
         try? modelContext.save()
+        AnalyticsService.shared.track(.sessionSaved)
     }
 
     @MainActor

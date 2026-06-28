@@ -66,6 +66,9 @@ struct VotingView: View {
                 case 0: votes[juror.id] = false
                 default: votes[juror.id] = nil
                 }
+                if votes.count == jurors.count {
+                    AnalyticsService.shared.track(.voteCompleted)
+                }
             }
         )
     }
