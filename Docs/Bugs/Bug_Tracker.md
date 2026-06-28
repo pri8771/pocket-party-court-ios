@@ -19,3 +19,9 @@
 - `xcodebuild -version` failed with `command not found`; `xcrun simctl list runtimes` failed with `xcrun: command not found`.
 - No build, test, or runtime product bugs were found or fixed because the mandatory Xcode validation gate failed before source edits.
 - Deferred: rerun Task 2D on macOS with Xcode installed and an iPhone 16 iOS Simulator runtime available.
+
+## Task 2E CI setup - 2026-06-28
+- Fixed CI infrastructure blocker: no GitHub Actions workflow existed for real macOS/Xcode validation. Added `.github/workflows/ci.yml` to run the required `xcodebuild` version, scheme listing, build, conditional test, status reporting, and log upload steps.
+- Fixed scheme discoverability blocker: added a shared `PocketPartyCourt` Xcode scheme under `PocketPartyCourt.xcodeproj/xcshareddata/xcschemes` so CI does not depend on developer-local scheme metadata.
+- No compile or test code defects could be fixed locally because this runner is Linux and does not provide `xcodebuild`; CI is now configured to expose any remaining Xcode-only build issues on macOS.
+- Deferred: add/register a real `PocketPartyCourtTests` Xcode target so CI can execute the existing test files instead of reporting tests as N/A.

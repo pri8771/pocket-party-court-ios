@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  xcode-build-and-test:
+    name: Xcode build and test
+    runs-on: macos-latest
+    env:
+      SCHEME: PocketPartyCourt
+      DESTINATION: platform=iOS Simulator,name=iPhone 16
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: xcodebuild -version | tee xcodebuild-version.log
+
+      - name: List Xcode project schemes and targets
+        run: xcodebuild -list -project PocketPartyCourt.xcodeproj | tee xcodebuild-list.log
+
+      - name: Build app
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project PocketPartyCourt.xcodeproj \
+            -scheme "$SCHEME" \
+            -destination "$DESTINATION" \
+            build 2>&1 | tee xcodebuild-build.log
+          echo "BUILD_STATUS=passed" >> "$GITHUB_ENV"
+
+      - name: Detect test target
+        id: test-target
+        shell: bash
+        run: |
+          set -euo pipefail
+          if xcodebuild -list -project PocketPartyCourt.xcodeproj | awk '/Targets:/{flag=1; next} /^$/{flag=0} flag {print}' | grep -q 'PocketPartyCourtTests'; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "TEST_STATUS=pending" >> "$GITHUB_ENV"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "TEST_STATUS=N/A - no test target exists in PocketPartyCourt.xcodeproj" >> "$GITHUB_ENV"
+          fi
+
+      - name: Test app
+        if: steps.test-target.outputs.exists == 'true'
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project PocketPartyCourt.xcodeproj \
+            -scheme "$SCHEME" \
+            -destination "$DESTINATION" \
+            test 2>&1 | tee xcodebuild-test.log
+          echo "TEST_STATUS=passed" >> "$GITHUB_ENV"
+
+      - name: Report validation status
+        if: always()
+        run: |
+          {
+            echo "## Pocket Party Court CI validation"
+            echo ""
+            echo "- Scheme: $SCHEME"
+            echo "- Destination: $DESTINATION"
+            echo "- Build status: ${BUILD_STATUS:-failed before completion}"
+            echo "- Test status: ${TEST_STATUS:-failed before completion}"
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload xcodebuild logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xcodebuild-logs
+          path: |
+            xcodebuild-version.log
+            xcodebuild-list.log
+            xcodebuild-build.log
+            xcodebuild-test.log
+          if-no-files-found: ignore

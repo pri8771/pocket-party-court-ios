@@ -17,3 +17,9 @@
 ## 2026-06-28 - Task 2C build/runtime validation
 - Documented repository identity, Swift toolchain version, Swift package command applicability, static Swift syntax check results, and Linux `xcodebuild` unavailability.
 - Completed manual Swift source review for obvious compile issues; no fixable source changes were required.
+
+## 2026-06-28 - Task 2E macOS/Xcode CI
+- Added GitHub Actions CI on `macos-latest` for real `xcodebuild` validation.
+- CI now checks the Xcode version, lists project schemes/targets, builds the `PocketPartyCourt` scheme on an iPhone 16 simulator, conditionally runs tests when a test target exists, reports build/test status to the workflow summary, and uploads xcodebuild logs.
+- Added a shared `PocketPartyCourt` Xcode scheme so GitHub Actions can resolve the app scheme consistently.
+
