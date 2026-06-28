@@ -31,7 +31,7 @@ struct HomeView: View {
                     }
 
                     Section("Choose a deck") {
-                        if decks.isEmpty {
+                        if decks.isEmpty, seedingError == nil {
                             ProgressView("Loading starter decks…")
                         } else {
                             ForEach(decks) { deck in
@@ -54,6 +54,7 @@ struct HomeView: View {
 
                     Section {
                         NavigationLink("Browse All Cases", destination: DeckListView())
+                        NavigationLink("History", destination: HistoryView())
                     }
                 }
                 .scrollContentBackground(.hidden)

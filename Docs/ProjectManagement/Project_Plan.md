@@ -12,3 +12,7 @@
 | 8 | Build voting screen | Done | Local vote choices scaffold |
 | 9 | Build verdict screen | Done | ShareLink starter |
 | 10 | Add docs and privacy policy | Done | Product and engineering docs |
+
+## Task 2B plan update - 2026-06-28
+- Completed engineering review fixes before advancing to additional gameplay scope.
+- Next recommended work: address deferred GameSession save/idempotency and 3-player jury behavior bugs before expanding gameplay modes.

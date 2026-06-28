@@ -28,6 +28,7 @@
 		00000000000000000000002B /* VerdictView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Features/Game/VerdictView.swift; sourceTree = "<group>"; };
 		00000000000000000000002D /* VotingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Features/Game/VotingView.swift; sourceTree = "<group>"; };
 		00000000000000000000002F /* StarterDecks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Sources/Resources/StarterDecks.json; sourceTree = "<group>"; };
+		000000000000000000000041 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Features/History/HistoryView.swift; sourceTree = "<group>"; };
 		00000000000000000000003F /* PocketPartyCourt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PocketPartyCourt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		000000000000000000000002 /* PocketPartyCourtApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000001 /* PocketPartyCourtApp.swift */; };
 		000000000000000000000004 /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000003 /* StoreService.swift */; };
@@ -53,6 +54,7 @@
 		00000000000000000000002C /* VerdictView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000002B /* VerdictView.swift */; };
 		00000000000000000000002E /* VotingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000002D /* VotingView.swift */; };
 		000000000000000000000030 /* StarterDecks.json in Resources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000002F /* StarterDecks.json */; };
+		000000000000000000000042 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000041 /* HistoryView.swift */; };
 		000000000000000000000031 = {isa = PBXGroup; children = (
 				000000000000000000000032 /* App */,
 				000000000000000000000033 /* Products */,
@@ -81,6 +83,7 @@
 				000000000000000000000029 /* CaseRevealView.swift */,
 				00000000000000000000002B /* VerdictView.swift */,
 				00000000000000000000002D /* VotingView.swift */,
+				000000000000000000000041 /* HistoryView.swift */,
 				00000000000000000000002F /* StarterDecks.json */,
 			); name = App; sourceTree = "<group>"; };
 		000000000000000000000033 /* Products */ = {isa = PBXGroup; children = (
@@ -110,6 +113,7 @@
 				00000000000000000000002A /* CaseRevealView.swift in Sources */,
 				00000000000000000000002C /* VerdictView.swift in Sources */,
 				00000000000000000000002E /* VotingView.swift in Sources */,
+				000000000000000000000042 /* HistoryView.swift in Sources */,
 			); runOnlyForDeploymentPostprocessing = 0; };
 		000000000000000000000037 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (
 				000000000000000000000030 /* StarterDecks.json in Resources */,

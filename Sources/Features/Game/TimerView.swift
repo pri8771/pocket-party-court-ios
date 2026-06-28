@@ -27,7 +27,10 @@ struct TimerView: View {
             Text(gameCase.prompt)
                 .font(PPCTypography.body)
                 .multilineTextAlignment(.center)
-            Button("Proceed to Vote") { shouldAdvance = true }
+            Button("Proceed to Vote") {
+                AnalyticsService.shared.track(.timerCompleted)
+                shouldAdvance = true
+            }
                 .buttonStyle(.borderedProminent)
             NavigationLink("", destination: VotingView(deck: deck, gameCase: gameCase, players: players), isActive: $shouldAdvance)
                 .hidden()
@@ -37,7 +40,10 @@ struct TimerView: View {
         .onReceive(timer) { _ in
             guard secondsRemaining > 0, !shouldAdvance else { return }
             secondsRemaining -= 1
-            if secondsRemaining == 0 { shouldAdvance = true }
+            if secondsRemaining == 0 {
+                AnalyticsService.shared.track(.timerCompleted)
+                shouldAdvance = true
+            }
         }
     }
 }
