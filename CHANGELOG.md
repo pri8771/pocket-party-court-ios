@@ -12,3 +12,8 @@
 - Propagated starter JSON loading/decoding failures and surfaced them on Home instead of silently loading forever.
 - Added History navigation and a completed-session History view.
 - Wired local analytics events through game start, deck selection, case draw, timer completion, vote completion, verdict generation, session save, and history viewing.
+
+
+## 2026-06-28 - Task 2C build/runtime validation
+- Documented repository identity, Swift toolchain version, Swift package command applicability, static Swift syntax check results, and Linux `xcodebuild` unavailability.
+- Completed manual Swift source review for obvious compile issues; no fixable source changes were required.
