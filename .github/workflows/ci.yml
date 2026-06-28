@@ -45,7 +45,7 @@ jobs:
           xcodebuild \
             -project "$PROJECT" \
             -scheme "$SCHEME" \
-            -destination "${{ steps.destination.outputs.destination }}" \
+            -destination "generic/platform=iOS Simulator" \
             build 2>&1 | tee xcodebuild-build.log
           echo "BUILD_STATUS=passed" >> "$GITHUB_ENV"
 
@@ -69,7 +69,7 @@ jobs:
           xcodebuild \
             -project "$PROJECT" \
             -scheme "$SCHEME" \
-            -destination "${{ steps.destination.outputs.destination }}" \
+            -destination "generic/platform=iOS Simulator" \
             test 2>&1 | tee xcodebuild-test.log
           echo "TEST_STATUS=passed" >> "$GITHUB_ENV"
 
