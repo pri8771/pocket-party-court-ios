@@ -36,3 +36,10 @@ Implement real game state progression, persistence seeding from `StarterDecks.js
 - Added a shared Xcode scheme at `PocketPartyCourt.xcodeproj/xcshareddata/xcschemes/PocketPartyCourt.xcscheme` so CI can resolve the `PocketPartyCourt` scheme without relying on user-local Xcode data.
 - Local verification in this Codex container remains limited to static checks because the host is Linux and `xcodebuild` is unavailable; the new workflow is the real macOS/Xcode validation path.
 - Current project test result is **N/A** in CI because `Tests/PocketPartyCourtTests` files exist in the repository but no `PocketPartyCourtTests` target is currently registered in `PocketPartyCourt.xcodeproj`.
+
+## 2026-06-28 - Task 2F CI build fix
+- Confirmed local checkout path as `/workspace/pocket-party-court-ios` on branch `codex/task-2f-fix-ci-build` from commit `743403a`.
+- Attempted to fetch `origin/main` from `https://github.com/pri8771/pocket-party-court-ios.git`, but network access to GitHub failed with `CONNECT tunnel failed, response 403`; the local merged PR #6 state was used.
+- Attempted the requested local `xcodebuild -scheme PocketPartyCourt -destination 'platform=iOS Simulator,name=iPhone 16' build`, but this container is Linux and does not include `xcodebuild`.
+- Diagnosed the likely GitHub Actions exit 70 root cause as a brittle hard-coded simulator destination. `xcodebuild` returns destination-related exit 70 before compilation when the named simulator is unavailable on the current runner image.
+- Updated CI to list available iOS simulators, select an available iPhone dynamically, reuse that destination for build/test, and include `simctl-devices.log` in uploaded artifacts.

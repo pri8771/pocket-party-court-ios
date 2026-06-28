@@ -23,3 +23,7 @@
 - CI now checks the Xcode version, lists project schemes/targets, builds the `PocketPartyCourt` scheme on an iPhone 16 simulator, conditionally runs tests when a test target exists, reports build/test status to the workflow summary, and uploads xcodebuild logs.
 - Added a shared `PocketPartyCourt` Xcode scheme so GitHub Actions can resolve the app scheme consistently.
 
+
+## 2026-06-28 - Task 2F CI destination fix
+- Replaced the hard-coded iPhone 16 CI destination with a runner-local simulator selection step so `xcodebuild` does not fail when the selected macOS/Xcode image lacks that exact simulator device.
+- Added a reusable simulator selection script and uploaded `simctl` device inventory with CI artifacts for future diagnosis.

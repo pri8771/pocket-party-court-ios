@@ -25,3 +25,8 @@
 - Fixed scheme discoverability blocker: added a shared `PocketPartyCourt` Xcode scheme under `PocketPartyCourt.xcodeproj/xcshareddata/xcschemes` so CI does not depend on developer-local scheme metadata.
 - No compile or test code defects could be fixed locally because this runner is Linux and does not provide `xcodebuild`; CI is now configured to expose any remaining Xcode-only build issues on macOS.
 - Deferred: add/register a real `PocketPartyCourtTests` Xcode target so CI can execute the existing test files instead of reporting tests as N/A.
+
+## Task 2F CI build failure - 2026-06-28
+- Fixed CI build blocker: `.github/workflows/ci.yml` pinned `DESTINATION` to `platform=iOS Simulator,name=iPhone 16`, which can fail with `xcodebuild` exit 70 when the GitHub-hosted macOS runner does not provide that exact simulator.
+- Added `.github/scripts/select-ios-simulator.sh` to choose an available iPhone from `xcrun simctl list devices available iOS` and fail early with a clear message if no iPhone simulator exists.
+- Environment limitation remains: this Linux container cannot execute Xcode builds (`xcodebuild: command not found`), so final verification must occur on GitHub Actions/macOS.
