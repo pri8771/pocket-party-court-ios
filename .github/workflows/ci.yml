@@ -12,7 +12,7 @@ jobs:
     runs-on: macos-latest
     env:
       SCHEME: PocketPartyCourt
-      DESTINATION: platform=iOS Simulator,name=iPhone 16
+      PROJECT: PocketPartyCourt.xcodeproj
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -21,15 +21,31 @@ jobs:
         run: xcodebuild -version | tee xcodebuild-version.log
 
       - name: List Xcode project schemes and targets
-        run: xcodebuild -list -project PocketPartyCourt.xcodeproj | tee xcodebuild-list.log
+        run: xcodebuild -list -project "$PROJECT" | tee xcodebuild-list.log
+
+      - name: Select available iOS Simulator destination
+        id: destination
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcrun simctl list devices available iOS | tee simctl-devices.log
+          destination_name="$(.github/scripts/select-ios-simulator.sh simctl-devices.log)"
+          if [ -z "$destination_name" ]; then
+            echo "No available iPhone simulator found" >&2
+            exit 1
+          fi
+          destination="platform=iOS Simulator,name=${destination_name}"
+          echo "Selected destination: ${destination}"
+          echo "destination=${destination}" >> "$GITHUB_OUTPUT"
+          echo "DESTINATION=${destination}" >> "$GITHUB_ENV"
 
       - name: Build app
         run: |
           set -o pipefail
           xcodebuild \
-            -project PocketPartyCourt.xcodeproj \
+            -project "$PROJECT" \
             -scheme "$SCHEME" \
-            -destination "$DESTINATION" \
+            -destination "${{ steps.destination.outputs.destination }}" \
             build 2>&1 | tee xcodebuild-build.log
           echo "BUILD_STATUS=passed" >> "$GITHUB_ENV"
 
@@ -38,7 +54,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if xcodebuild -list -project PocketPartyCourt.xcodeproj | awk '/Targets:/{flag=1; next} /^$/{flag=0} flag {print}' | grep -q 'PocketPartyCourtTests'; then
+          if xcodebuild -list -project "$PROJECT" | awk '/Targets:/{flag=1; next} /^$/{flag=0} flag {print}' | grep -q 'PocketPartyCourtTests'; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
             echo "TEST_STATUS=pending" >> "$GITHUB_ENV"
           else
@@ -51,9 +67,9 @@ jobs:
         run: |
           set -o pipefail
           xcodebuild \
-            -project PocketPartyCourt.xcodeproj \
+            -project "$PROJECT" \
             -scheme "$SCHEME" \
-            -destination "$DESTINATION" \
+            -destination "${{ steps.destination.outputs.destination }}" \
             test 2>&1 | tee xcodebuild-test.log
           echo "TEST_STATUS=passed" >> "$GITHUB_ENV"
 
@@ -64,7 +80,7 @@ jobs:
             echo "## Pocket Party Court CI validation"
             echo ""
             echo "- Scheme: $SCHEME"
-            echo "- Destination: $DESTINATION"
+            echo "- Destination: ${DESTINATION:-not selected}"
             echo "- Build status: ${BUILD_STATUS:-failed before completion}"
             echo "- Test status: ${TEST_STATUS:-failed before completion}"
           } | tee -a "$GITHUB_STEP_SUMMARY"
@@ -77,6 +93,7 @@ jobs:
           path: |
             xcodebuild-version.log
             xcodebuild-list.log
+            simctl-devices.log
             xcodebuild-build.log
             xcodebuild-test.log
           if-no-files-found: ignore
