@@ -1,0 +1,58 @@
+{
+  "decks": [
+    {
+      "id": "friend-court",
+      "title": "Friend Court",
+      "description": "Silly friend disputes for dramatic living-room justice.",
+      "icon": "🍕",
+      "cases": [
+        { "id": "friend-1", "prompt": "Ate the last slice of pizza and left the box as a decoy.", "category": "snacks" },
+        { "id": "friend-2", "prompt": "Sent twelve voice notes instead of one text.", "category": "communication" },
+        { "id": "friend-3", "prompt": "Claimed aux cord power, then played one song on repeat.", "category": "music" },
+        { "id": "friend-4", "prompt": "Borrowed a hoodie and started calling it vintage.", "category": "fashion" },
+        { "id": "friend-5", "prompt": "Spoiled a show finale with suspiciously specific hints.", "category": "entertainment" },
+        { "id": "friend-6", "prompt": "Arrived late but blamed the group chat vibes.", "category": "timing" },
+        { "id": "friend-7", "prompt": "Took the best selfie angle and cropped everyone else badly.", "category": "photos" },
+        { "id": "friend-8", "prompt": "Invented house rules halfway through a board game.", "category": "games" },
+        { "id": "friend-9", "prompt": "Finished the shared fries while maintaining eye contact.", "category": "snacks" },
+        { "id": "friend-10", "prompt": "Said 'five minutes away' while still choosing shoes.", "category": "timing" }
+      ]
+    },
+    {
+      "id": "family-tribunal",
+      "title": "Family Tribunal",
+      "description": "Low-stakes household squabbles with high-stakes speeches.",
+      "icon": "🏠",
+      "cases": [
+        { "id": "family-1", "prompt": "Changed the thermostat and denied touching it.", "category": "home" },
+        { "id": "family-2", "prompt": "Used the last clean towel without starting laundry.", "category": "chores" },
+        { "id": "family-3", "prompt": "Ate leftovers clearly labeled with another person's name.", "category": "food" },
+        { "id": "family-4", "prompt": "Paused a movie every two minutes to explain the plot.", "category": "movies" },
+        { "id": "family-5", "prompt": "Loaded the dishwasher like a modern art installation.", "category": "chores" },
+        { "id": "family-6", "prompt": "Told an embarrassing baby story to new guests.", "category": "history" },
+        { "id": "family-7", "prompt": "Moved the remote to a secret second location.", "category": "living room" },
+        { "id": "family-8", "prompt": "Declared a snack 'for everyone' after eating most of it.", "category": "food" },
+        { "id": "family-9", "prompt": "Started a group photo after everyone had changed clothes.", "category": "photos" },
+        { "id": "family-10", "prompt": "Reheated fish and called it an act of courage.", "category": "kitchen" }
+      ]
+    },
+    {
+      "id": "office-chaos-court",
+      "title": "Office Chaos Court",
+      "description": "Workplace comedy cases for off-the-clock party groups.",
+      "icon": "💼",
+      "cases": [
+        { "id": "office-1", "prompt": "Replied all with 'thanks' and created a notification avalanche.", "category": "email" },
+        { "id": "office-2", "prompt": "Booked a meeting that could have been a three-word message.", "category": "meetings" },
+        { "id": "office-3", "prompt": "Took the last donut and left the empty box in the break room.", "category": "snacks" },
+        { "id": "office-4", "prompt": "Said 'quick sync' and scheduled forty-five minutes.", "category": "meetings" },
+        { "id": "office-5", "prompt": "Renamed a shared file to 'final_final_REAL_final'.", "category": "files" },
+        { "id": "office-6", "prompt": "Mic stayed unmuted during a very crunchy snack break.", "category": "video calls" },
+        { "id": "office-7", "prompt": "Borrowed a charger and built a permanent desk shrine around it.", "category": "supplies" },
+        { "id": "office-8", "prompt": "Used corporate jargon to describe ordering lunch.", "category": "language" },
+        { "id": "office-9", "prompt": "Set a calendar invite for 4:59 PM on Friday.", "category": "calendar" },
+        { "id": "office-10", "prompt": "Left one sip of coffee in the pot to avoid making more.", "category": "kitchen" }
+      ]
+    }
+  ]
+}
