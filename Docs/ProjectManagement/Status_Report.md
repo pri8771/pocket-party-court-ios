@@ -29,3 +29,10 @@ Implement real game state progression, persistence seeding from `StarterDecks.js
 - Required build command `xcodebuild -scheme PocketPartyCourt -destination 'platform=iOS Simulator,name=iPhone 16' build` was not run because the mandatory macOS/Xcode gate failed.
 - Required test command `xcodebuild -scheme PocketPartyCourt -destination 'platform=iOS Simulator,name=iPhone 16' test` was not run because the mandatory macOS/Xcode gate failed.
 - No application source files were changed. Task 2D cannot be completed in this environment; it must be rerun on a macOS host with Xcode and an available iOS simulator runtime.
+
+## 2026-06-28 - Task 2E macOS/Xcode CI setup
+- Added `.github/workflows/ci.yml` to run the required real Xcode validation on GitHub-hosted `macos-latest` runners.
+- CI commands include `xcodebuild -version`, `xcodebuild -list -project PocketPartyCourt.xcodeproj`, `xcodebuild -project PocketPartyCourt.xcodeproj -scheme PocketPartyCourt -destination 'platform=iOS Simulator,name=iPhone 16' build`, and conditional `xcodebuild ... test` execution when `PocketPartyCourtTests` exists as an Xcode project target.
+- Added a shared Xcode scheme at `PocketPartyCourt.xcodeproj/xcshareddata/xcschemes/PocketPartyCourt.xcscheme` so CI can resolve the `PocketPartyCourt` scheme without relying on user-local Xcode data.
+- Local verification in this Codex container remains limited to static checks because the host is Linux and `xcodebuild` is unavailable; the new workflow is the real macOS/Xcode validation path.
+- Current project test result is **N/A** in CI because `Tests/PocketPartyCourtTests` files exist in the repository but no `PocketPartyCourtTests` target is currently registered in `PocketPartyCourt.xcodeproj`.
