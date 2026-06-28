@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct DeckDetailView: View {
-    let deck: StarterDeckDTO
+    let deck: CaseDeck
 
     var body: some View {
         List(deck.cases) { gameCase in

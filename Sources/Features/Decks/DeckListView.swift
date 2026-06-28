@@ -1,7 +1,8 @@
+import SwiftData
 import SwiftUI
 
 struct DeckListView: View {
-    private let decks = DeckService().loadStarterDecks()
+    @Query(sort: \CaseDeck.title) private var decks: [CaseDeck]
 
     var body: some View {
         List(decks) { deck in
@@ -9,7 +10,7 @@ struct DeckListView: View {
                 VStack(alignment: .leading) {
                     Text("\(deck.icon) \(deck.title)")
                         .font(PPCTypography.title)
-                    Text(deck.description)
+                    Text(deck.deckDescription)
                         .font(PPCTypography.caption)
                 }
             }
