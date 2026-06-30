@@ -2,9 +2,12 @@ import SwiftUI
 
 struct GameSetupView: View {
     let deck: CaseDeck
-    @State private var playerNames = ["Alex", "Sam", "Jordan"]
-    @State private var selectedCase: GameCase?
+
+    @State private var playerNames: [String] = ["Alex", "Sam", "Jordan"]
     @State private var argumentDuration = 60
+    @State private var activeStore: GameStore?
+
+    private static let emojiPalette = ["⚖️", "🦊", "🐼", "🐯", "🦁", "🐸", "🐙", "🦄"]
 
     private var trimmedNames: [String] {
         playerNames.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { !$0.isEmpty }
@@ -12,90 +15,142 @@ struct GameSetupView: View {
 
     private var validationMessage: String? {
         let names = trimmedNames
-        guard (2...6).contains(names.count) else { return "Enter 2–6 player names." }
-        guard Set(names.map { $0.lowercased() }).count == names.count else { return "Player names must be unique." }
+        guard (JuryRules.minPlayers...JuryRules.maxPlayers).contains(names.count) else {
+            return "Enter \(JuryRules.minPlayers)–\(JuryRules.maxPlayers) player names."
+        }
+        guard Set(names.map { $0.lowercased() }).count == names.count else {
+            return "Player names must be unique."
+        }
         return nil
     }
 
-    private var assignedPlayers: [Player] {
-        let names = trimmedNames
-        return names.enumerated().map { index, name in
-            let role: PlayerRole
-            switch (names.count, index) {
-            case (2, 0): role = .plaintiff
-            case (2, 1): role = .defendant
-            case (_, 0): role = .judge
-            case (_, 1): role = .plaintiff
-            case (_, 2): role = .defendant
-            default: role = .jury
-            }
-            return Player(name: name, role: role)
-        }
-    }
+    private var canStart: Bool { validationMessage == nil && !deck.cases.isEmpty }
 
     var body: some View {
-        Form {
-            Section("Deck") {
-                Text("\(deck.icon) \(deck.title)")
-                Text(deck.deckDescription)
-                    .foregroundStyle(.secondary)
+        ScrollView {
+            VStack(spacing: 20) {
+                deckBanner
+                playersCard
+                timerCard
+                if let validationMessage {
+                    Label(validationMessage, systemImage: "exclamationmark.circle.fill")
+                        .font(PPCTypography.caption)
+                        .foregroundStyle(PPCColors.guilty)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                PPCPrimaryButton(title: "Begin Trial", icon: "gavel.fill", isEnabled: canStart) {
+                    startGame()
+                }
+                Text("Roles are assigned by order. The plaintiff and defendant argue; the judge and jury vote. With two players, both argue and vote.")
+                    .font(PPCTypography.caption)
+                    .foregroundStyle(PPCColors.inkSecondary)
+                    .multilineTextAlignment(.center)
             }
+            .padding(20)
+        }
+        .ppcScreenBackground()
+        .navigationTitle("Set the Stage")
+        .navigationBarTitleDisplayMode(.inline)
+        .fullScreenCover(item: $activeStore) { store in
+            GameContainerView(store: store, deckAccent: deck.accent)
+        }
+    }
 
-            Section("Players") {
+    // MARK: Cards
+
+    private var deckBanner: some View {
+        HStack(spacing: 14) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 16, style: .continuous).fill(deck.accent.opacity(0.16))
+                Text(deck.icon).font(.system(size: 30))
+            }
+            .frame(width: 56, height: 56)
+            VStack(alignment: .leading, spacing: 3) {
+                Text(deck.title).font(PPCTypography.title3).foregroundStyle(PPCColors.ink)
+                Text("\(deck.cases.count) cases ready").font(PPCTypography.caption).foregroundStyle(PPCColors.inkSecondary)
+            }
+            Spacer()
+        }
+        .padding(14)
+        .background(PPCColors.paper)
+        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(PPCColors.hairline, lineWidth: 1))
+    }
+
+    private var playersCard: some View {
+        PPCCard {
+            VStack(alignment: .leading, spacing: 14) {
+                PPCSectionHeader(eyebrow: "Who's in the room", title: "Players")
                 ForEach(playerNames.indices, id: \.self) { index in
-                    HStack {
+                    HStack(spacing: 10) {
+                        Text(Self.emojiPalette[index % Self.emojiPalette.count])
+                            .font(.title3)
                         TextField("Player \(index + 1)", text: $playerNames[index])
-                        Text(roleName(for: index))
-                            .font(PPCTypography.caption)
+                            .textInputAutocapitalization(.words)
+                            .font(PPCTypography.body)
+                        RoleBadge(role: JuryRules.role(forIndex: index, playerCount: trimmedNames.count))
+                        if playerNames.count > JuryRules.minPlayers {
+                            Button {
+                                Haptics.tap()
+                                playerNames.remove(at: index)
+                            } label: {
+                                Image(systemName: "minus.circle.fill").foregroundStyle(PPCColors.inkSecondary)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    if index < playerNames.count - 1 { Divider().overlay(PPCColors.hairline) }
+                }
+                if playerNames.count < JuryRules.maxPlayers {
+                    Button {
+                        Haptics.tap()
+                        playerNames.append("")
+                    } label: {
+                        Label("Add player", systemImage: "plus.circle.fill")
+                            .font(PPCTypography.bodyEmphasis)
                             .foregroundStyle(PPCColors.gavel)
                     }
-                }
-                .onDelete { playerNames.remove(atOffsets: $0) }
-
-                if playerNames.count < 6 {
-                    Button("Add Player") { playerNames.append("") }
-                }
-            } footer: {
-                Text("Roles are assigned by order for 3+ players: judge, plaintiff, defendant, then jury. With two players, players are plaintiff and defendant and both vote locally.")
-            }
-
-            Section("Timer") {
-                Stepper("Argument timer: \(argumentDuration) seconds", value: $argumentDuration, in: 30...180, step: 15)
-            }
-
-            if let validationMessage {
-                Section {
-                    Text(validationMessage)
-                        .foregroundStyle(.red)
+                    .buttonStyle(.plain)
                 }
             }
+        }
+    }
 
-            Section {
-                Button("Reveal First Case") {
-                    AnalyticsService.shared.track(.deckSelected)
-                    AnalyticsService.shared.track(.gameStarted)
-                    selectedCase = deck.cases.randomElement() ?? deck.cases.first
-                    if selectedCase != nil {
-                        AnalyticsService.shared.track(.caseDrawn)
+    private var timerCard: some View {
+        PPCCard {
+            VStack(alignment: .leading, spacing: 12) {
+                PPCSectionHeader(eyebrow: "Keep it moving", title: "Argument timer")
+                Stepper(value: $argumentDuration, in: 30...180, step: 15) {
+                    HStack {
+                        Image(systemName: "timer").foregroundStyle(PPCColors.gavel)
+                        Text("\(argumentDuration) seconds").font(PPCTypography.bodyEmphasis)
                     }
                 }
-                .disabled(validationMessage != nil || deck.cases.isEmpty)
             }
-        }
-        .navigationTitle("Game Setup")
-        .navigationDestination(item: $selectedCase) { gameCase in
-            CaseRevealView(deck: deck, gameCase: gameCase, players: assignedPlayers, argumentDuration: argumentDuration)
         }
     }
 
-    private func roleName(for index: Int) -> String {
-        switch (trimmedNames.count, index) {
-        case (2, 0): return PlayerRole.plaintiff.rawValue
-        case (2, 1): return PlayerRole.defendant.rawValue
-        case (_, 0): return PlayerRole.judge.rawValue
-        case (_, 1): return PlayerRole.plaintiff.rawValue
-        case (_, 2): return PlayerRole.defendant.rawValue
-        default: return PlayerRole.jury.rawValue
+    // MARK: Actions
+
+    private func startGame() {
+        let names = trimmedNames
+        guard canStart else { return }
+        let roundPlayers = names.enumerated().map { index, name in
+            RoundPlayer(name: name, emoji: Self.emojiPalette[index % Self.emojiPalette.count])
         }
+        let store = GameStore(
+            deck: deck.content,
+            cases: deck.caseContents,
+            players: roundPlayers,
+            argumentDuration: argumentDuration
+        )
+        AnalyticsService.shared.track(.deckSelected)
+        AnalyticsService.shared.track(.gameStarted)
+        activeStore = store
     }
+}
+
+// Allow presenting via `.fullScreenCover(item:)`.
+extension GameStore: Identifiable {
+    var id: ObjectIdentifier { ObjectIdentifier(self) }
 }

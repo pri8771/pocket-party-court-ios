@@ -13,4 +13,11 @@ enum AnalyticsEvent: String, CaseIterable {
     case caseRevealed = "case_revealed"
     case voteCast = "vote_cast"
     case verdictShared = "verdict_shared"
+    case nextCaseStarted = "next_case_started"
+    case newRoundStarted = "new_round_started"
+    case gameRestarted = "game_restarted"
+    case gameExited = "game_exited"
+    case paywallViewed = "paywall_viewed"
+    case deckUnlocked = "deck_unlocked"
+    case aboutViewed = "about_viewed"
 }

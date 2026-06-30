@@ -1,5 +1,29 @@
 # Changelog
 
+## 1.0.0 - 2026-06-30 — Full v1 build
+
+### Engine (PR0–PR2)
+- Added `GameStore`, a UI- and SwiftData-free full-case state machine: setup → case reveal → arguments → voting → verdict, looping to next case / new round from **every** verdict.
+- Introduced the `Verdict` enum (`guilty | notGuilty | hungJury`); the tally is now a total function with exact ties → hung jury.
+- Fixed the 3-player jury bug: `JuryRules` guarantees a non-empty voter set for 2–8 players (litigants argue; judge + jury vote; both litigants vote in a 2-player game).
+- Party-reality hardening: add a latecomer (joins jury) or drop a player mid-round without ending the game; safe role reassignment when a litigant leaves; restart; votes live in the store so backgrounding mid-vote is safe.
+- Replaced silent `try?` session saves with explicit, non-blocking error handling.
+
+### Content & monetization (PR3 + deck packs)
+- Tone-reviewed the starter decks and added per-case argument hints, accent colors, and a work-safe flag (Office Chaos Court is the work-safe icebreaker deck).
+- Added a premium **Date Night Court** deck behind a one-time IAP, with a paywall and a StoreKit-ready `StoreService` (local unlock fallback). No ads, no subscriptions.
+
+### Verdict card & sharing (PR4)
+- Redesigned the shareable verdict card as a branded, screenshot-perfect growth asset (wordmark, case, verdict stamp, winner, tagline). It carries **no** vote breakdown or per-voter data, enforced by tests.
+
+### Design ("Claude design")
+- New "playful courtroom" design system: dynamic light/dark color tokens, dual rounded/serif type scale, reusable components, vector gavel mark, countdown ring, rubber-stamp verdict, and a confetti reveal. Redesigned every screen plus a new About screen and an app icon + accent color asset catalog.
+
+### Project & CI
+- Regenerated the Xcode project with `SDKROOT = iphoneos` (fixes the iOS-destination resolution) and a registered `PocketPartyCourtTests` unit-test target.
+- Added 32 unit tests (engine, jury, verdict, share-privacy, seeding, history) — all passing.
+- Fixed the CI workflow's broken `xcodebuild` line continuation so build + tests actually run.
+
 ## 0.1.0
 - Added initial iOS project scaffold.
 - Added SwiftUI feature screens.
