@@ -1,10 +1,24 @@
 # Status Report
 
-## Current Status
-Initial scaffold is complete. The project contains the requested folder structure, SwiftData model stubs, SwiftUI flow screens, starter decks, and planning documentation.
+## Current Status (updated 2026-06-30 — see ../../LAUNCH_READINESS.md)
+**Building (early).** The app plays one case end to end as a SwiftUI navigation flow (deck → players/
+roles → case → timer → vote → verdict → share), with idempotent SwiftData seeding from
+`StarterDecks.json`, a design system, local DEBUG-only analytics, and unit-test files. Estimated
+production-readiness ~40%.
+
+**Top open items (full triage in LAUNCH_READINESS.md §7):**
+- No multi-case loop / scoring / "crown a winner" (single-case flow only).
+- No central restart-safe game-state machine; state is navigation-bound; no add/drop players mid-game.
+- 3-player voting bug: no jury voter; the judge decides alone.
+- Unit tests are not registered in the Xcode project, so CI runs zero tests.
+- Missing app icon and `PrivacyInfo.xcprivacy`; `PRIVACY_POLICY.md`/`TERMS_OF_SERVICE.md` reconciled
+  this pass.
+- App has not been verified to build/run on real macOS/Xcode yet.
 
 ## Next Focus
-Implement real game state progression, persistence seeding from `StarterDecks.json`, and dynamic player/vote handling.
+Get the app building/running on real Xcode and wire the test target into CI; fix 3-player voting;
+build the restart-safe state machine + multi-case loop + scoring + winner screen; add app icon +
+privacy manifest. Persistence seeding from `StarterDecks.json` and the single-case loop are already done.
 
 ## 2026-06-28 - Task 2B status
 - Fixed required Task 2 review issues for stable seeded IDs, idempotent granular seeding, explicit JSON error handling, History view access, and local analytics wiring.

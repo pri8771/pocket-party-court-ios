@@ -45,7 +45,8 @@ jobs:
           xcodebuild \
             -project "$PROJECT" \
             -scheme "$SCHEME" \
-                -destination "${DESTINATION}" \            build 2>&1 | tee xcodebuild-build.log
+            -destination "${DESTINATION}" \
+            build 2>&1 | tee xcodebuild-build.log
           echo "BUILD_STATUS=passed" >> "$GITHUB_ENV"
 
       - name: Detect test target
@@ -68,7 +69,8 @@ jobs:
           xcodebuild \
             -project "$PROJECT" \
             -scheme "$SCHEME" \
-                -destination "${DESTINATION}" \            test 2>&1 | tee xcodebuild-test.log
+            -destination "${DESTINATION}" \
+            test 2>&1 | tee xcodebuild-test.log
           echo "TEST_STATUS=passed" >> "$GITHUB_ENV"
 
       - name: Report validation status

@@ -2,6 +2,12 @@
 
 Pocket Party Court is a funny offline iOS party game where friends put silly disputes on trial, vote locally, and generate shareable verdict cards.
 
+**Status: Building (early).** The app plays one case end to end today (deck → players/roles → case →
+timer → vote → verdict → share). The full v1 — a restart-safe, multi-case state machine with scoring,
+a "crown a winner" finale, and dynamic add/drop players — is the build-to scope and is not yet
+implemented. The canonical launch scope, MVP feature status, bug triage, and production-readiness
+checklist live in [`LAUNCH_READINESS.md`](LAUNCH_READINESS.md).
+
 ## Principles
 - Local-only gameplay
 - No backend, login, cloud sync, or third-party packages
