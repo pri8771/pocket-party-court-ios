@@ -360,13 +360,11 @@ clean "play again") are resolved.
   Why blocking: App Store Connect rejects builds without an app icon and (as of 2024) requires a
   privacy manifest. Encryption-exemption declaration is needed to avoid export-compliance prompts.
 
-- **B6 — CI build/test invocation is syntactically malformed.**
-  Where: `.github/workflows/ci.yml` lines 48 and 71 —
-  `-destination "${DESTINATION}" \            build` / `… \            test`. The line-continuation is
-  mangled, putting `build`/`test` on the same physical line after an escaped space, so `xcodebuild`
-  does not receive a clean `build`/`test` action.
-  Why blocking: the **only** real macOS/Xcode validation path is broken, so green CI cannot be trusted
-  as proof the app builds. Fix the YAML so `build`/`test` are proper trailing actions.
+- **B6 — CI build/test invocation (RESOLVED 2026-06-30).** The earlier `ci.yml` had mangled
+  `build`/`test` line-continuations. The workflow was rewritten this pass to select a simulator via
+  `.github/scripts/select-ios-simulator.sh` and pass a well-formed `-destination`; an independent
+  audit confirmed the build/test actions are now syntactically correct. No longer a launch blocker —
+  it just still needs a green run on a macOS runner to prove the app actually compiles (see B8).
 
 - **B7 — Privacy policy doc is self-contradictory and corrupted; reconcile before store privacy
   labeling.**
@@ -409,14 +407,14 @@ clean "play again") are resolved.
 
 ## 8. Production-Readiness Assessment
 
-**Current estimated readiness: ~40%.**
+**Current estimated readiness: ~28%.**  _(Recalibrated from 40% on 2026-06-30 after an independent audit weighted 'never built/run' and the single-shot loop more heavily.)_
 
 Justification: the app is a real, coherent SwiftUI + SwiftData project with a clean architecture, a
 design system, well-formed bundled content, idempotent seeding, and a flow that plays **one** case
 end to end — a genuine vertical slice. But it is materially short of the agreed v1: the **core game
 loop is single-shot** (no multi-case/scoring/winner — B2), there is **no restart-safe state machine**
-(B3), a **real correctness bug at 3 players** (B1), **tests don't run in CI** (B4), the **CI build is
-malformed** (B6), and **store/privacy prerequisites are missing** (B5/B7). Critically, the app has
+(B3), a **real correctness bug at 3 players** (B1), **tests don't run in CI** (B4), and **store/privacy
+prerequisites are missing** (B5/B7). Critically, the app has
 **never been verified to build or run on real Xcode** (B8). That combination caps confidence well
 below the "MVP Ready" bar (core loop runs end-to-end with tests; only polish/content/store left).
 
