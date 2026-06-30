@@ -18,7 +18,7 @@ Delivered against the locked plan (PR0–PR4) from the agent planning thread:
 - Human gate: the cold 4–6 person play test (see `Docs/Business/Beta_Playtest_Plan.md`).
 
 ## Next Focus
-Run the cold play-test gate, wire live StoreKit, and prep TestFlight.
+Run the cold play-test gate, wire live StoreKit (future monetization), and prep TestFlight.
 
 ## 2026-06-28 - Task 2B status
 - Fixed required Task 2 review issues for stable seeded IDs, idempotent granular seeding, explicit JSON error handling, History view access, and local analytics wiring.

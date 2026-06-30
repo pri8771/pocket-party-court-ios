@@ -1,152 +1,148 @@
-# Pocket Party Court - Privacy Policy
+# Pocket Party Court — Privacy Policy
+
+_Updated 2026-06-30 to match the shipped product and launch scope. See LAUNCH_READINESS.md._
 
 **Effective Date:** June 28, 2026
-**Last Updated:** June 28, 2026
+**Last Updated:** June 30, 2026
 
 ---
 
 ## Overview
 
-Pocket Party Court is designed with privacy as a core principle. This app is **fully offline** and **collects no personal data whatsoever**.
+Pocket Party Court is a **fully offline** iOS party game. It makes **no network connections**, has
+**no accounts**, uses **no third-party SDKs**, and **transmits no data off your device**.
 
-We built Pocket Party Court with a simple philosophy: **what happens at the party, stays at the party** - and on your device only.
+Our philosophy: what happens at the party stays at the party — and on your device only.
+
+This policy is intentionally precise about the small amount of data the app stores **locally on your
+device**, so that it is consistent with what the app actually does.
 
 ---
 
 ## The Short Version
 
-- We collect **zero** personal information
-- - We do **not** require an account
-  - - We do **not** connect to the internet
-    - - We do **not** send any data anywhere
-      - - Everything happens **locally on your device**
-        - - We have **nothing to share** with third parties because we collect nothing
-         
-          - ---
+- The app **does not connect to the internet** and **sends nothing to any server or third party**.
+- It requires **no account** and asks for **no device permissions** (no camera, microphone, location,
+  contacts, photos, or notifications).
+- It stores a **small amount of game data on your device only** (see below). Nothing is uploaded.
+- It includes **no advertising, attribution, or third-party tracking SDKs**.
 
-          ## What Data We Collect
+---
 
-          **None.**
+## What Data the App Stores (On Device Only)
 
-          Pocket Party Court does not collect, store, transmit, or share any personal data, usage data, analytics, crash reports, device identifiers, location data, contact information, or any other information about you or your device.
+Pocket Party Court does **not** collect data for us — nothing is transmitted, and we (the developer)
+never receive any information about you. The app does, however, store the following **locally on your
+device** so the game works:
 
-          ---
+- **Game content and sessions (SwiftData):** the bundled starter decks/cases, and a local history of
+  completed cases. A saved case record can include the player names you typed and the case prompt
+  played. This data lives only in the app's on-device storage and is removed if you delete the app.
+- **Diagnostic logging (development builds only):** in internal/DEBUG builds the app keeps an
+  in-memory list of gameplay events (e.g. "game started", "verdict generated") and prints them to the
+  developer console for debugging. This is **not present in the App Store release build**, is never
+  written to a server, and never leaves the device.
 
-          ## How the App Works
+We do not collect, transmit, or share any personal data, usage analytics, crash reports, device
+identifiers, location data, or contact information.
 
-          Pocket Party Court is a purely local, offline party game. Here is exactly what the app does with your device:
+---
 
-          **Local Storage (optional):**
-          - Game scores and session results may be stored temporarily in local device memory during a game session
-          - - No game data is persisted beyond the current session unless explicitly saved by you
-            - - All locally stored data remains only on your device
-             
-              - **No Network Access:**
-              - - The app does not request internet permissions
-                - - The app does not make any network connections
-                  - - No data is sent to any server, API, or third-party service
-                   
-                    - **No Permissions Required:**
-                    - - No camera access
-                      - - No microphone access
-                        - - No location access
-                          - - No contacts access
-                            - - No photos access
-                              - - No notification permissions (unless added for optional features)
-                               
-                                - ---
+## How the App Works
 
-                                ## Analytics and Crash Reporting
+- **No network access:** the app makes no network connections and requests no internet permission.
+- **No permissions required:** no camera, microphone, location, contacts, photos, or notification
+  access.
+- **Local storage:** game history and session results are stored only on your device via SwiftData.
+- **Sharing:** when you tap "Share Verdict Card," iOS presents its standard share sheet with an image
+  you choose to share. The image contains only the verdict, the case prompt, the aggregate vote tally,
+  and a comedic summary — it does **not** include private arguments, who voted which way, or your
+  player roster. Sharing is initiated by you, through Apple's share sheet; the app itself sends nothing.
 
-                                Pocket Party Court does **not** include any analytics SDKs, crash reporting tools, advertising networks, or tracking libraries.
+---
 
-                                We do not use:
-                                - Firebase Analytics
-                                - - Google Analytics
-                                  - - Apple Analytics (opt-in system analytics only, controlled by user's iOS settings)
-                                    - - Crashlytics or any crash reporting service
-                                      - - Any advertising or attribution SDK
-                                       
-                                        - ---
+## Analytics and Crash Reporting
 
-                                        ## Third-Party Services
+The App Store release build includes **no** analytics SDKs, crash reporting tools, advertising
+networks, or tracking libraries. We do not use Firebase, Google Analytics, Crashlytics, or any
+advertising/attribution SDK. The only event logging that exists is the on-device, DEBUG-only
+diagnostic logging described above, which is excluded from release builds and never transmitted.
 
-                                        Pocket Party Court does not integrate with any third-party services, APIs, SDKs, or platforms that would receive any data about you or your usage.
+---
 
-                                        ---
+## Children's Privacy
 
-                                        ## Children's Privacy
+Pocket Party Court collects no data and transmits nothing off the device, so it inherently complies
+with children's privacy laws including COPPA. That said, the game's tone is aimed at a general
+audience; please review the App Store age rating and the Terms of Service for guidance on appropriate
+group settings.
 
-                                        Pocket Party Court is appropriate for all ages, including children. Because we collect no data whatsoever, this app inherently complies with children's privacy laws including COPPA (Children's Online Privacy Protection Act).
+---
 
-                                        No data about anyone - including children - is ever collected.
+## Apple System Services
 
-                                        ---
+As with all iOS apps, your device's operating system may collect diagnostic or analytics information
+governed by Apple's own privacy policy and your device settings — controlled entirely by Apple and
+your iOS settings, not by Pocket Party Court. To review or change this: **Settings → Privacy &
+Security → Analytics & Improvements**.
 
-                                        ## Device Permissions
+---
 
-                                        Pocket Party Court requests **no device permissions** beyond the minimum required to run the application. Any permissions shown in the App Store Privacy Nutrition Label reflect only the technical minimum required by iOS, not active data collection.
+## Data Security
 
-                                        ---
+Any data the app stores exists only in your device's local app storage and is protected by your
+device's built-in security (passcode, Face ID, Touch ID). Deleting the app removes this data.
 
-                                        ## Apple System Services
+---
 
-                                        As with all iOS apps, your device's standard iOS system may collect certain diagnostic or analytics information governed by Apple's own privacy policy and your device settings. This is controlled entirely by Apple and your iOS privacy settings - not by Pocket Party Court.
+## Your Rights
 
-                                        To review or modify what Apple collects from your device, go to:
-                                        **Settings > Privacy & Security > Analytics & Improvements**
+Because nothing is transmitted to us, there is no server-side data for us to provide, correct, or
+delete. You control all on-device data through standard iOS settings, and you can remove it by
+deleting the app. _(A planned in-app "Clear History" control is tracked in the launch checklist.)_
 
-                                        ---
+---
 
-                                        ## Data Security
+## Changes to This Privacy Policy
 
-                                        Since we collect no data, there is no user data for us to secure or protect. All game data that may exist temporarily during a session is stored only in your device's local memory and is governed by your device's built-in security (passcode, Face ID, Touch ID).
+If we update this policy we will revise the "Last Updated" date and include the change in the next app
+release.
 
-                                        ---
+---
 
-                                        ## Your Rights
+## Contact
 
-                                        Since we collect no personal data, there is no data for us to provide, correct, or delete. You have complete control over all information on your device through your standard iOS device management settings.
+- **App:** Pocket Party Court
+- **GitHub:** https://github.com/pri8771/pocket-party-court-ios
+- **Support:** _[Add support email or URL before submission]_
 
-                                        ---
+---
 
-                                        ## Changes to This Privacy Policy
+## Summary for App Store Privacy Nutrition Label
 
-                                        If we update this Privacy Policy, we will update the "Last Updated" date above and include the change in our next app release. Given that we collect no data, substantial changes to this policy are unlikely.
+The app collects no data that is linked to you or used to track you, and transmits nothing off the
+device. All listed categories are answered as **not collected** (no data leaves the device):
 
-                                        ---
+| Category | Collected / Transmitted |
+|----------|-------------------------|
+| Contact Info | None |
+| Health & Fitness | None |
+| Financial Info | None |
+| Location | None |
+| Sensitive Info | None |
+| Contacts | None |
+| User Content | None transmitted (player names / prompts stored on device only) |
+| Browsing/Search History | None |
+| Identifiers | None |
+| Usage Data | None transmitted (DEBUG-only diagnostics, not in release) |
+| Diagnostics | None transmitted |
+| Other Data | None |
 
-                                        ## Contact
+**Target App Store Privacy answer: "Data Not Collected"** (the app stores some data on device but
+transmits nothing off the device). Confirm this against Apple's current questionnaire wording before
+submission, and add a `PrivacyInfo.xcprivacy` manifest.
 
-                                        If you have questions about this Privacy Policy or our privacy practices, please reach out:
+---
 
-                                        - **App:** Pocket Party Court
-                                        - - **GitHub:** https://github.com/pri8771/pocket-party-court-ios
-                                          - - **Support:** [Add support email or URL]
-                                           
-                                            - ---
-
-                                            ## Summary for App Store Privacy Nutrition Label
-
-                                            | Category | Data Collected |
-                                            |----------|---------------|
-                                            | Contact Info | None |
-                                            | Health & Fitness | None |
-                                            | Financial Info | None |
-                                            | Location | None |
-                                            | Sensitive Info | None |
-                                            | Contacts | None |
-                                            | User Content | None |
-                                            | Browsing History | None |
-                                            | Search History | None |
-                                            | Identifiers | None |
-                                            | Usage Data | None |
-                                            | Diagnostics | None |
-                                            | Other Data | None |
-
-                                            **App Store Privacy Nutrition Label: "No Data Collected"**
-
-                                            ---
-
-                                            *Pocket Party Court is committed to your privacy. We built an app that is genuinely, technically incapable of violating your privacy because it never touches your data.*
-                                            
+*Pocket Party Court is built to be private by construction: it never touches the network and never
+sends your data anywhere.*
