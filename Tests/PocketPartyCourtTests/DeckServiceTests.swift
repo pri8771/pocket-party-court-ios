@@ -25,12 +25,12 @@ final class DeckServiceTests: XCTestCase {
         XCTAssertEqual(deck?.cases.first?.plaintiffHint, "ph")
     }
 
-    func testBundledCatalogDecodesWithFourDecks() throws {
-        // The shipped catalog must stay decodable and contain the premium deck.
+    func testBundledCatalogDecodesAndIsFree() throws {
+        // The shipped catalog must stay decodable; v1 ships no paid decks.
         let decks = try DeckService().loadStarterDecks()
         XCTAssertGreaterThanOrEqual(decks.count, 4)
-        XCTAssertTrue(decks.contains { $0.isPremium == true })
         XCTAssertTrue(decks.contains { $0.isWorkSafe == true })
+        XCTAssertFalse(decks.contains { $0.isPremium == true }, "v1 ships no premium decks")
     }
 
     func testSeedingIsGranularAndIdempotent() throws {

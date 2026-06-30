@@ -92,6 +92,9 @@ struct GameContainerView: View {
         case .verdict:
             VerdictView(store: store, deckAccent: deckAccent, onExit: { dismiss() })
                 .transition(.scale(scale: 0.96).combined(with: .opacity))
+        case .finale:
+            WinnerView(store: store, onExit: { dismiss() })
+                .transition(.scale(scale: 0.96).combined(with: .opacity))
         }
     }
 }

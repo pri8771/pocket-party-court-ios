@@ -6,6 +6,7 @@ struct HistoryView: View {
     @Query(filter: #Predicate<GameSession> { $0.completedAt != nil },
            sort: \GameSession.completedAt, order: .reverse)
     private var completedSessions: [GameSession]
+    @State private var showClearConfirm = false
 
     var body: some View {
         Group {
@@ -29,7 +30,29 @@ struct HistoryView: View {
         .ppcScreenBackground()
         .navigationTitle("Verdict History")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            if !completedSessions.isEmpty {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(role: .destructive) { showClearConfirm = true } label: {
+                        Image(systemName: "trash")
+                    }
+                    .accessibilityLabel("Clear all history")
+                }
+            }
+        }
+        .confirmationDialog("Clear all verdict history?", isPresented: $showClearConfirm, titleVisibility: .visible) {
+            Button("Clear everything", role: .destructive) { clearAll() }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("This permanently deletes every saved verdict on this device.")
+        }
         .onAppear { AnalyticsService.shared.track(.historyViewed) }
+    }
+
+    private func clearAll() {
+        for session in completedSessions { modelContext.delete(session) }
+        try? modelContext.save()
+        Haptics.warning()
     }
 
     private func row(_ session: GameSession) -> some View {

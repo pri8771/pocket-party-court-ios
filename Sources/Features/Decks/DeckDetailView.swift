@@ -1,23 +1,16 @@
 import SwiftUI
 
 struct DeckDetailView: View {
-    @Environment(StoreService.self) private var store
     let deck: CaseDeck
-    @State private var showPaywall = false
 
-    private var locked: Bool { !store.isUnlocked(deck) }
     private var sortedCases: [GameCase] { deck.cases.sorted { $0.id < $1.id } }
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 14) {
                 header
-                if locked {
-                    lockedTeaser
-                } else {
-                    ForEach(sortedCases) { gameCase in
-                        caseRow(gameCase)
-                    }
+                ForEach(sortedCases) { gameCase in
+                    caseRow(gameCase)
                 }
             }
             .padding(20)
@@ -25,7 +18,6 @@ struct DeckDetailView: View {
         .ppcScreenBackground()
         .navigationTitle(deck.title)
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $showPaywall) { PaywallView(deck: deck) }
     }
 
     private var header: some View {
@@ -54,30 +46,6 @@ struct DeckDetailView: View {
                     .font(.system(.body, design: .serif))
                     .foregroundStyle(PPCColors.ink)
                 PPCTag(text: gameCase.category, tint: deck.accent)
-            }
-        }
-    }
-
-    private var lockedTeaser: some View {
-        VStack(spacing: 14) {
-            ForEach(sortedCases.prefix(2)) { gameCase in
-                caseRow(gameCase)
-            }
-            PPCCard {
-                VStack(spacing: 12) {
-                    Image(systemName: "lock.fill").font(.title).foregroundStyle(PPCColors.brass)
-                    Text("\(deck.cases.count - 2) more cases in this premium deck")
-                        .font(PPCTypography.headline)
-                        .multilineTextAlignment(.center)
-                        .foregroundStyle(PPCColors.ink)
-                    Text("Unlock once, keep forever. No subscription.")
-                        .font(PPCTypography.caption)
-                        .foregroundStyle(PPCColors.inkSecondary)
-                    PPCPrimaryButton(title: "Unlock \(deck.title)", icon: "lock.open.fill") {
-                        showPaywall = true
-                    }
-                }
-                .frame(maxWidth: .infinity)
             }
         }
     }

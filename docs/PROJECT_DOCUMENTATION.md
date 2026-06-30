@@ -13,21 +13,21 @@ courtroom bit. A co-located group of 2–6 plays on one phone: they name players
 courtroom roles, reveal a silly case, run an argument timer, vote locally, and reveal a shareable
 verdict card. It is for friend groups, roommates, couples, and party hosts.
 
-**Implementation status (2026-06-30): Building (early).** The app currently plays **one** case end to
-end as a SwiftUI navigation flow. The full game — a restart-safe, multi-case state machine with
-scoring, a "crown a winner" finale, and dynamic add/drop of players — is the intended v1 but is **not
-yet built**. The previous version of this document described that intended end-state (case creation,
-evidence prompts, penalty cards, full history) as if it were the shipped scope; that has been
-corrected here.
+**Implementation status (2026-06-30): v1 full build, ~82% production-ready.** The full game is now
+implemented: a restart-safe `GameStore` state machine, multi-case loop with per-case scoring and a
+"crown the winner" finale, dynamic add/drop of players, the three-way verdict, and a branded,
+privacy-safe verdict card. Built/run/tested on an iOS 26 simulator (37 unit tests). Per the launch
+scope, **v1 ships with no monetization** (four free decks; `StoreService` inert). See
+`../LAUNCH_READINESS.md` for full status.
 
 ## 01. Product
-**Shipped v1 core loop (works today):** pick a deck → enter 2–6 player names + auto-assigned roles →
-reveal a random case → argument timer → local Guilty/Not-Guilty voting → verdict → shareable verdict
-card. Bundled content: 3 starter decks, 30 cases (`Sources/Resources/StarterDecks.json`).
+**Shipped v1 core loop:** pick a deck → enter 2–8 player names + auto-assigned roles → reveal a case →
+argument timer → local Guilty/Not-Guilty voting → verdict → shareable verdict card → next case /
+crown the winner. Bundled content: 4 starter decks, 40 cases (`Sources/Resources/StarterDecks.json`).
 
-**Intended v1 (build-to, not yet implemented):** a restart-safe game-state machine that loops across
-multiple cases/rounds, accumulates per-player score, crowns a winner, and supports adding/dropping
-players mid-game. See `LAUNCH_READINESS.md` §2 (F8/F9) and §7 (B1–B3).
+**Built v1 game system:** a restart-safe state machine that loops across multiple cases, accumulates
+per-case score, crowns a winner, and supports adding/dropping players mid-game (`LAUNCH_READINESS.md`
+§2 F8/F9 — now Built; §7 B1–B3 — now resolved).
 
 **Out of scope for v1:** custom/user-authored cases, penalty/dare cards, in-app purchases/paid decks,
 any backend/online/multiplayer, ads/tracking. (Penalty cards and evidence prompts were in earlier

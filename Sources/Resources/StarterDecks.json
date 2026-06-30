@@ -73,8 +73,8 @@
       "icon": "💘",
       "accentHex": "D6478F",
       "isWorkSafe": false,
-      "isPremium": true,
-      "productID": "com.pocketpartycourt.deck.datenight",
+      "isPremium": false,
+      "productID": "",
       "cases": [
         { "id": "date-1", "prompt": "Said 'I don't care where we eat' and rejected nine restaurants.", "category": "dinner", "plaintiffHint": "Read the rejected list aloud, one by one.", "defendantHint": "Argue you cared about all the wrong ones." },
         { "id": "date-2", "prompt": "Promised 'one more episode' at midnight three nights running.", "category": "tv", "plaintiffHint": "Enter the sleep-deprivation evidence.", "defendantHint": "Argue cliffhangers are legally binding." },

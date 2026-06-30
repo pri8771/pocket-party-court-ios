@@ -7,9 +7,11 @@ pure game-state machine, SwiftData `@Model` entities, and small local services.
 
 - **Engine (`Sources/Core/Engine`)** — the heart of the app.
   - `GameStore` (`@Observable`) is the full-case state machine. It walks
-    `GamePhase` (`setup → caseReveal → arguments → voting → verdict`) and loops
-    back to `caseReveal` for the next case / new round. It works on value types
-    (`RoundPlayer`, `DeckContent`, `CaseContent`) and has **no** SwiftUI or
+    `GamePhase` (`setup → caseReveal → arguments → voting → verdict → finale`)
+    and loops back to `caseReveal` for the next case / new round. It also owns
+    **per-case scoring** (the winning litigant scores a point) and exposes
+    `standings`/`winners` for the "crown the winner" finale. It works on value
+    types (`RoundPlayer`, `DeckContent`, `CaseContent`) with **no** SwiftUI or
     SwiftData dependency, so every transition is unit-testable headless.
   - `VerdictEngine` — pure three-way tally (`guilty | notGuilty | hungJury`),
     a total function where exact ties resolve to a hung jury.
@@ -25,7 +27,8 @@ pure game-state machine, SwiftData `@Model` entities, and small local services.
 - **Design System (`Sources/Core/DesignSystem`)** — colors, typography,
   components, the gavel mark, countdown ring, verdict stamp, and confetti.
 - **Features (`Sources/Features`)** — Home, Game (a `GameContainerView` that
-  renders the screen for the current phase), Decks + paywall, History, About.
+  renders the screen for the current phase, ending in `WinnerView`), Decks,
+  History, About.
 
 ## Game flow
 

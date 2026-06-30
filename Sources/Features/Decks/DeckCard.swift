@@ -1,10 +1,9 @@
 import SwiftUI
 
 /// Rich deck card used on Home and the deck browser. Shows the deck's accent,
-/// icon, blurb, case count, and a work-safe / premium-lock badge.
+/// icon, blurb, case count, and a work-safe badge.
 struct DeckCard: View {
     let deck: CaseDeck
-    var locked: Bool = false
 
     var body: some View {
         HStack(spacing: 14) {
@@ -18,16 +17,9 @@ struct DeckCard: View {
             .frame(width: 60, height: 60)
 
             VStack(alignment: .leading, spacing: 5) {
-                HStack(spacing: 6) {
-                    Text(deck.title)
-                        .font(PPCTypography.title3)
-                        .foregroundStyle(PPCColors.ink)
-                    if deck.isPremium {
-                        Image(systemName: locked ? "lock.fill" : "checkmark.seal.fill")
-                            .font(.caption)
-                            .foregroundStyle(locked ? PPCColors.brass : PPCColors.notGuilty)
-                    }
-                }
+                Text(deck.title)
+                    .font(PPCTypography.title3)
+                    .foregroundStyle(PPCColors.ink)
                 Text(deck.deckDescription)
                     .font(PPCTypography.callout)
                     .foregroundStyle(PPCColors.inkSecondary)
@@ -38,17 +30,14 @@ struct DeckCard: View {
                     if deck.isWorkSafe {
                         PPCTag(text: "Work-safe", tint: PPCColors.notGuilty)
                     }
-                    if deck.isPremium && locked {
-                        PPCTag(text: "Premium", tint: PPCColors.brass)
-                    }
                 }
             }
 
             Spacer(minLength: 0)
 
-            Image(systemName: locked ? "lock.circle.fill" : "chevron.right.circle.fill")
+            Image(systemName: "chevron.right.circle.fill")
                 .font(.title3)
-                .foregroundStyle(locked ? PPCColors.brass : deck.accent.opacity(0.6))
+                .foregroundStyle(deck.accent.opacity(0.6))
         }
         .padding(14)
         .background(PPCColors.paper)

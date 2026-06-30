@@ -2,7 +2,6 @@ import SwiftData
 import SwiftUI
 
 struct DeckListView: View {
-    @Environment(StoreService.self) private var store
     @Query(sort: \CaseDeck.sortIndex) private var decks: [CaseDeck]
 
     var body: some View {
@@ -16,7 +15,7 @@ struct DeckListView: View {
                     NavigationLink {
                         DeckDetailView(deck: deck)
                     } label: {
-                        DeckCard(deck: deck, locked: !store.isUnlocked(deck))
+                        DeckCard(deck: deck)
                     }
                     .buttonStyle(PPCPressStyle())
                 }

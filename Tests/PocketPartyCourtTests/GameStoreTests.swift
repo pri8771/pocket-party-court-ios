@@ -136,6 +136,64 @@ final class GameStoreTests: XCTestCase {
         XCTAssertNil(s.currentCase)
     }
 
+    // MARK: Scoring + winner finale
+
+    func testWinningLitigantScoresAPoint() {
+        let s = makeStore(players: 4)
+        s.beginCase(); s.startArguments(); s.goToVoting()
+        let plaintiff = s.plaintiff!
+        castVotes(s, for: .guilty)   // guilty → plaintiff wins
+        s.revealVerdict()
+        XCTAssertEqual(s.score(for: plaintiff), 1)
+        XCTAssertEqual(s.standings.first?.player.id, plaintiff.id)
+    }
+
+    func testHungJuryAwardsNoPoints() {
+        let s = makeStore(players: 4)
+        s.beginCase(); s.startArguments(); s.goToVoting()
+        castVotes(s, for: .hungJury)
+        s.revealVerdict()
+        XCTAssertTrue(s.winners.isEmpty)
+        XCTAssertEqual(s.standings.map(\.score).reduce(0, +), 0)
+    }
+
+    func testScoresAccumulateAcrossCasesAndCrownAWinner() {
+        let s = makeStore(players: 4, cases: 8)
+        s.beginCase()
+        for _ in 0..<3 {
+            if s.phase == .verdict { s.nextCase() }
+            s.startArguments(); s.goToVoting()
+            castVotes(s, for: .guilty)   // current plaintiff wins each time
+            s.revealVerdict()
+        }
+        let totalPoints = s.standings.map(\.score).reduce(0, +)
+        XCTAssertEqual(totalPoints, 3)
+        XCTAssertFalse(s.winners.isEmpty)
+
+        s.crownWinner()
+        XCTAssertEqual(s.phase, .finale)
+    }
+
+    func testCrownWinnerOnlyFromVerdict() {
+        let s = makeStore(players: 4)
+        s.beginCase()
+        s.crownWinner()
+        XCTAssertEqual(s.phase, .caseReveal)   // ignored — not at a verdict
+    }
+
+    func testPlayAgainClearsScoresAndStartsFresh() {
+        let s = makeStore(players: 4)
+        s.beginCase(); s.startArguments(); s.goToVoting()
+        castVotes(s, for: .guilty)
+        s.revealVerdict()
+        s.crownWinner()
+
+        s.playAgain()
+        XCTAssertEqual(s.phase, .caseReveal)
+        XCTAssertEqual(s.standings.map(\.score).reduce(0, +), 0)
+        XCTAssertEqual(s.casesPlayed, 0)
+    }
+
     // MARK: Snapshot privacy
 
     func testCompletedSnapshotHasTotalsNotPerVoter() {

@@ -3,13 +3,11 @@ import SwiftUI
 
 struct HomeView: View {
     @Environment(\.modelContext) private var modelContext
-    @Environment(StoreService.self) private var store
     @Query(sort: \CaseDeck.sortIndex) private var decks: [CaseDeck]
 
     @State private var viewModel = HomeViewModel()
     @State private var seedingError: String?
     @State private var path: [CaseDeck] = []
-    @State private var paywallDeck: CaseDeck?
     @State private var showAbout = false
 
     var body: some View {
@@ -37,9 +35,6 @@ struct HomeView: View {
             }
             .navigationDestination(for: CaseDeck.self) { deck in
                 GameSetupView(deck: deck)
-            }
-            .sheet(item: $paywallDeck) { deck in
-                PaywallView(deck: deck)
             }
             .sheet(isPresented: $showAbout) { AboutView() }
             .task { seedIfNeeded() }
@@ -75,9 +70,10 @@ struct HomeView: View {
             } else {
                 ForEach(decks) { deck in
                     Button {
-                        select(deck)
+                        Haptics.selection()
+                        path.append(deck)
                     } label: {
-                        DeckCard(deck: deck, locked: isLocked(deck))
+                        DeckCard(deck: deck)
                     }
                     .buttonStyle(PPCPressStyle())
                 }
@@ -154,17 +150,6 @@ struct HomeView: View {
     }
 
     // MARK: Actions
-
-    private func isLocked(_ deck: CaseDeck) -> Bool { !store.isUnlocked(deck) }
-
-    private func select(_ deck: CaseDeck) {
-        if isLocked(deck) {
-            paywallDeck = deck
-        } else {
-            Haptics.selection()
-            path.append(deck)
-        }
-    }
 
     private func seedIfNeeded() {
         do {

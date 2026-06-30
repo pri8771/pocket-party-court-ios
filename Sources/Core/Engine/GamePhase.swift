@@ -9,6 +9,8 @@ enum GamePhase: String, Codable, CaseIterable, Equatable {
     case arguments
     case voting
     case verdict
+    /// The "crown the winner" leaderboard shown when the group ends the game.
+    case finale
 }
 
 /// Plain-value snapshot of a deck's content, decoupled from SwiftData so the

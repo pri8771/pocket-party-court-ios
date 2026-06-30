@@ -39,6 +39,8 @@ struct VerdictView: View {
                             .foregroundStyle(PPCColors.inkSecondary)
                             .padding(.horizontal, 24)
 
+                        standingsStrip
+
                         shareButton(result: result)
                         actionButtons
                     }
@@ -92,6 +94,32 @@ struct VerdictView: View {
         }
     }
 
+    private var standingsStrip: some View {
+        let standings = store.standings
+        return Group {
+            if store.casesPlayed > 1 {
+                VStack(spacing: 8) {
+                    Text("Standings · \(store.casesPlayed) cases")
+                        .ppcEyebrow(PPCColors.inkSecondary)
+                    HStack(spacing: 10) {
+                        ForEach(standings.prefix(4), id: \.player.id) { entry in
+                            VStack(spacing: 2) {
+                                Text(entry.player.emoji)
+                                Text("\(entry.score)")
+                                    .font(PPCTypography.bodyEmphasis)
+                                    .foregroundStyle(entry.score > 0 ? PPCColors.gavel : PPCColors.inkSecondary)
+                            }
+                        }
+                    }
+                }
+                .padding(.vertical, 10)
+                .frame(maxWidth: .infinity)
+                .background(PPCColors.paper.opacity(0.6))
+                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+            }
+        }
+    }
+
     private var actionButtons: some View {
         VStack(spacing: 12) {
             PPCPrimaryButton(title: "Next Case", icon: "arrow.right.circle.fill") {
@@ -100,10 +128,9 @@ struct VerdictView: View {
                 store.nextCase()
             }
             HStack(spacing: 12) {
-                PPCSecondaryButton(title: "New Round", icon: "arrow.triangle.2.circlepath") {
-                    AnalyticsService.shared.track(.newRoundStarted)
-                    reset()
-                    store.newRound()
+                PPCSecondaryButton(title: "Crown Winner", icon: "crown.fill") {
+                    AnalyticsService.shared.track(.winnerCrowned)
+                    store.crownWinner()
                 }
                 PPCSecondaryButton(title: "End Game", icon: "flag.checkered") {
                     AnalyticsService.shared.track(.gameExited)

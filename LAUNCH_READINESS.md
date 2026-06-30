@@ -1,5 +1,17 @@
 # Pocket Party Court — Launch Readiness (v1)
 
+> **UPDATE 2026-06-30 (v1 full build):** The build-to gaps in this document are now **closed**.
+> The app builds, runs, and passes 37 unit tests on an iOS 26 simulator (Xcode 16). Delivered:
+> a restart-safe `GameStore` state machine; the three-way verdict; **multi-case loop with per-case
+> scoring and a "crown the winner" finale (F8/F9)**; dynamic add/drop players; the 3-player voting
+> fix (B1); a registered, CI-run test target (B4); app icon + `PrivacyInfo.xcprivacy` +
+> `ITSAppUsesNonExemptEncryption=NO` (B5); a fixed CI workflow (B6); and a full "playful courtroom"
+> design system. Per §3, **v1 ships with no monetization** — all four bundled decks are free and
+> `StoreService` is an inert stub. **Re-estimated readiness: ~82%** (was 28%). Section text below is
+> the original gap analysis, retained for history; resolved items are marked in this banner and §8.
+
+
+
 > **Pocket Party Court** is an offline iOS party game where a co-located group puts silly,
 > low-stakes disputes on trial, votes locally on one shared phone, and ends each case with a
 > dramatic, shareable verdict card. It is for friend groups, roommates, couples, and party hosts
@@ -407,7 +419,7 @@ clean "play again") are resolved.
 
 ## 8. Production-Readiness Assessment
 
-**Current estimated readiness: ~28%.**  _(Recalibrated from 40% on 2026-06-30 after an independent audit weighted 'never built/run' and the single-shot loop more heavily.)_
+**Current estimated readiness: ~82%.**  _(Recalibrated upward from 28% on 2026-06-30 after the v1 full build: the app now builds/runs/tests on real Xcode, the multi-case loop + scoring + winner finale + restart-safe engine landed, the 3-player bug is fixed, the test target runs in CI, and the app icon + privacy manifest were added. Original 28% justification retained below for history.)_
 
 Justification: the app is a real, coherent SwiftUI + SwiftData project with a clean architecture, a
 design system, well-formed bundled content, idempotent seeding, and a flow that plays **one** case
@@ -447,6 +459,16 @@ below the "MVP Ready" bar (core loop runs end-to-end with tests; only polish/con
 
 Completing 1–7 lands roughly 80% (a real, tested, store-eligible game loop); 8–12 push toward 90% and
 a credible TestFlight.
+
+**v1 full-build status (2026-06-30):** Items **1–7 are complete** and **8–11 are largely done**
+(per-item notes below). Item **12 (cold-group play test)** is the open human gate.
+1 ✅ builds/runs/smoke-tested on iOS 26 · 2 ✅ test target in CI (37 tests) · 3 ✅ 3-player voting fixed ·
+4 ✅ `GameStore` restart-safe engine · 5 ✅ multi-case loop + scoring + "crown the winner" finale ·
+6 ✅ add/drop players mid-game · 7 ✅ app icon + `PrivacyInfo.xcprivacy` + `ITSAppUsesNonExemptEncryption=NO` ·
+8 ◧ history clear/delete + privacy in About done; App Store questionnaire + hosted URL remain ·
+9 ✅ tone sign-off in `Docs/Content/Deck_Tone_Signoff.md` · 10 ✅ funnel cleaned + verdict haptics (sound deferred) ·
+11 ◧ dynamic light/dark + Dynamic Type + VoiceOver labels; formal a11y audit remains · 12 ⏳ human play test.
+**Monetization stays off for v1** (§3.3): all four decks free, `StoreService` inert. Re-estimated readiness **~82%**.
 
 ### Test coverage summary
 - **What's tested (files present):**

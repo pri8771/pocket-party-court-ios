@@ -63,7 +63,9 @@ selecting an available simulator automatically.
 
 ## Status
 
-v1 is feature-complete and ~80–90% production-ready. The remaining production
-wiring is the live StoreKit 2 transaction flow (the `StoreService` surface is in
-place and unlocks locally for development/TestFlight) and App Store assets
-(screenshots, hosted privacy-policy URL). See `Docs/ProjectManagement/Status_Report.md`.
+v1 is feature-complete and ~82% production-ready (full status and the build-to
+checklist live in [`LAUNCH_READINESS.md`](LAUNCH_READINESS.md)). The remaining
+work is App Store assets (screenshots, hosted privacy-policy URL, final privacy
+questionnaire), a formal accessibility audit, and the cold-group play test. v1
+ships no monetization; live StoreKit deck packs are a documented *future* item.
+See `Docs/ProjectManagement/Status_Report.md`.

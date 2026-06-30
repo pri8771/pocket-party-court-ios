@@ -4,18 +4,20 @@
 v1 is feature-complete and ~80–90% production-ready. Built, run, and verified on
 iOS 26 simulators (Xcode 16); 32 unit tests pass; zero source warnings.
 
-Delivered against the locked plan (PR0–PR4) from the agent planning thread:
-- **Engine:** `GameStore` full-case state machine; `Verdict` three-way tally (tie → hung jury); next case / new round reachable from every verdict.
+Delivered against the canonical scope in `LAUNCH_READINESS.md` (readiness 28% → ~82%):
+- **Engine:** `GameStore` restart-safe state machine; `Verdict` three-way tally (tie → hung jury); multi-case loop with **per-case scoring and a "crown the winner" finale**; next case / new round reachable from every verdict.
 - **Party hardening:** add/drop player mid-round, safe restart, votes survive backgrounding, obvious next action at every step.
-- **Content:** tone-reviewed decks with argument hints + accent colors; Office Chaos Court flagged work-safe; premium Date Night Court behind a one-time IAP.
-- **Verdict card:** branded, screenshot-perfect, privacy-safe (no vote breakdown) — built as a growth asset.
-- **Design:** full "playful courtroom" design system, every screen redesigned, app icon + accent color, About screen.
-- **Project/CI:** `SDKROOT = iphoneos` fix, registered test target, fixed CI workflow.
+- **Content:** tone-reviewed decks (sign-off recorded) with argument hints + accent colors; Office Chaos Court flagged work-safe. Four **free** decks — no monetization in v1.
+- **Verdict card:** branded, screenshot-perfect, privacy-safe (no vote breakdown).
+- **Design:** full "playful courtroom" design system, every screen redesigned, app icon + accent color, About + winner screens.
+- **Store readiness:** `PrivacyInfo.xcprivacy`, `ITSAppUsesNonExemptEncryption=NO`, History clear/delete.
+- **Project/CI:** `SDKROOT = iphoneos` fix, registered test target (37 tests), fixed CI workflow.
 
 ## Remaining for 100%
-- Live StoreKit 2 transaction flow (App Store Connect product config). `StoreService` surface is in place and unlocks locally for dev/TestFlight.
-- App Store assets: screenshots, hosted privacy-policy URL, App Store description/keywords.
+- App Store assets: screenshots, hosted privacy-policy URL, App Store description/keywords, final privacy questionnaire.
+- Formal accessibility audit; verdict-moment sound.
 - Human gate: the cold 4–6 person play test (see `Docs/Business/Beta_Playtest_Plan.md`).
+- (Future, not v1) live StoreKit deck packs — `StoreService` is an inert stub today.
 
 ## Next Focus
 Run the cold play-test gate, wire live StoreKit (future monetization), and prep TestFlight.

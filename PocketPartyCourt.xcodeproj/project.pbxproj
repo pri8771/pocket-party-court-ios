@@ -35,33 +35,34 @@
 		000000000000000000000036 /* DeckCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000035; };
 		000000000000000000000038 /* DeckDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000037; };
 		00000000000000000000003A /* DeckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000039; };
-		00000000000000000000003C /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000003B; };
-		00000000000000000000003E /* ArgumentTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000003D; };
-		000000000000000000000040 /* CaseRevealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000003F; };
-		000000000000000000000042 /* GameContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000041; };
-		000000000000000000000044 /* GameSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000043; };
-		000000000000000000000046 /* VerdictCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000045; };
-		000000000000000000000048 /* VerdictView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000047; };
-		00000000000000000000004A /* VotingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000049; };
+		00000000000000000000003C /* ArgumentTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000003B; };
+		00000000000000000000003E /* CaseRevealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000003D; };
+		000000000000000000000040 /* GameContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000003F; };
+		000000000000000000000042 /* GameSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000041; };
+		000000000000000000000044 /* VerdictCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000043; };
+		000000000000000000000046 /* VerdictView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000045; };
+		000000000000000000000048 /* VotingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000047; };
+		00000000000000000000004A /* WinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000049; };
 		00000000000000000000004C /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000004B; };
 		00000000000000000000004E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000004D; };
 		000000000000000000000050 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000004F; };
 		000000000000000000000052 /* StarterDecks.json in Resources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000051; };
 		000000000000000000000054 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000053; };
-		000000000000000000000056 /* DeckServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000055; };
-		000000000000000000000058 /* GameStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000057; };
-		00000000000000000000005A /* HistoryAndAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000059; };
-		00000000000000000000005C /* JuryRulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000005B; };
-		00000000000000000000005E /* ShareServicePrivacyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000005D; };
-		000000000000000000000060 /* VerdictEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000005F; };
+		000000000000000000000056 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000055; };
+		000000000000000000000058 /* DeckServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000057; };
+		00000000000000000000005A /* GameStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000059; };
+		00000000000000000000005C /* HistoryAndAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000005B; };
+		00000000000000000000005E /* JuryRulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000005D; };
+		000000000000000000000060 /* ShareServicePrivacyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000005F; };
+		000000000000000000000062 /* VerdictEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000061; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		00000000000000000000007A /* PBXContainerItemProxy */ = {
+		00000000000000000000007C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 00000000000000000000006F /* Project object */;
+			containerPortal = 000000000000000000000071 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 000000000000000000000068;
+			remoteGlobalIDString = 00000000000000000000006A;
 			remoteInfo = PocketPartyCourt;
 		};
 /* End PBXContainerItemProxy section */
@@ -96,37 +97,38 @@
 		000000000000000000000035 /* DeckCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Decks/DeckCard.swift"; sourceTree = "<group>"; };
 		000000000000000000000037 /* DeckDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Decks/DeckDetailView.swift"; sourceTree = "<group>"; };
 		000000000000000000000039 /* DeckListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Decks/DeckListView.swift"; sourceTree = "<group>"; };
-		00000000000000000000003B /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Decks/PaywallView.swift"; sourceTree = "<group>"; };
-		00000000000000000000003D /* ArgumentTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Game/ArgumentTimerView.swift"; sourceTree = "<group>"; };
-		00000000000000000000003F /* CaseRevealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Game/CaseRevealView.swift"; sourceTree = "<group>"; };
-		000000000000000000000041 /* GameContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Game/GameContainerView.swift"; sourceTree = "<group>"; };
-		000000000000000000000043 /* GameSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Game/GameSetupView.swift"; sourceTree = "<group>"; };
-		000000000000000000000045 /* VerdictCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Game/VerdictCardView.swift"; sourceTree = "<group>"; };
-		000000000000000000000047 /* VerdictView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Game/VerdictView.swift"; sourceTree = "<group>"; };
-		000000000000000000000049 /* VotingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Game/VotingView.swift"; sourceTree = "<group>"; };
+		00000000000000000000003B /* ArgumentTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Game/ArgumentTimerView.swift"; sourceTree = "<group>"; };
+		00000000000000000000003D /* CaseRevealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Game/CaseRevealView.swift"; sourceTree = "<group>"; };
+		00000000000000000000003F /* GameContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Game/GameContainerView.swift"; sourceTree = "<group>"; };
+		000000000000000000000041 /* GameSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Game/GameSetupView.swift"; sourceTree = "<group>"; };
+		000000000000000000000043 /* VerdictCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Game/VerdictCardView.swift"; sourceTree = "<group>"; };
+		000000000000000000000045 /* VerdictView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Game/VerdictView.swift"; sourceTree = "<group>"; };
+		000000000000000000000047 /* VotingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Game/VotingView.swift"; sourceTree = "<group>"; };
+		000000000000000000000049 /* WinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Game/WinnerView.swift"; sourceTree = "<group>"; };
 		00000000000000000000004B /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/History/HistoryView.swift"; sourceTree = "<group>"; };
 		00000000000000000000004D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Home/HomeView.swift"; sourceTree = "<group>"; };
 		00000000000000000000004F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Features/Home/HomeViewModel.swift"; sourceTree = "<group>"; };
-		000000000000000000000055 /* DeckServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tests/PocketPartyCourtTests/DeckServiceTests.swift"; sourceTree = "<group>"; };
-		000000000000000000000057 /* GameStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tests/PocketPartyCourtTests/GameStoreTests.swift"; sourceTree = "<group>"; };
-		000000000000000000000059 /* HistoryAndAnalyticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tests/PocketPartyCourtTests/HistoryAndAnalyticsTests.swift"; sourceTree = "<group>"; };
-		00000000000000000000005B /* JuryRulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tests/PocketPartyCourtTests/JuryRulesTests.swift"; sourceTree = "<group>"; };
-		00000000000000000000005D /* ShareServicePrivacyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tests/PocketPartyCourtTests/ShareServicePrivacyTests.swift"; sourceTree = "<group>"; };
-		00000000000000000000005F /* VerdictEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tests/PocketPartyCourtTests/VerdictEngineTests.swift"; sourceTree = "<group>"; };
+		000000000000000000000057 /* DeckServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tests/PocketPartyCourtTests/DeckServiceTests.swift"; sourceTree = "<group>"; };
+		000000000000000000000059 /* GameStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tests/PocketPartyCourtTests/GameStoreTests.swift"; sourceTree = "<group>"; };
+		00000000000000000000005B /* HistoryAndAnalyticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tests/PocketPartyCourtTests/HistoryAndAnalyticsTests.swift"; sourceTree = "<group>"; };
+		00000000000000000000005D /* JuryRulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tests/PocketPartyCourtTests/JuryRulesTests.swift"; sourceTree = "<group>"; };
+		00000000000000000000005F /* ShareServicePrivacyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tests/PocketPartyCourtTests/ShareServicePrivacyTests.swift"; sourceTree = "<group>"; };
+		000000000000000000000061 /* VerdictEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tests/PocketPartyCourtTests/VerdictEngineTests.swift"; sourceTree = "<group>"; };
 		000000000000000000000051 /* StarterDecks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Sources/Resources/StarterDecks.json"; sourceTree = "<group>"; };
 		000000000000000000000053 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Sources/Resources/Assets.xcassets"; sourceTree = "<group>"; };
-		000000000000000000000061 /* PocketPartyCourt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PocketPartyCourt.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		000000000000000000000062 /* PocketPartyCourtTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PocketPartyCourtTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		000000000000000000000055 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Sources/Resources/PrivacyInfo.xcprivacy"; sourceTree = "<group>"; };
+		000000000000000000000063 /* PocketPartyCourt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PocketPartyCourt.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		000000000000000000000064 /* PocketPartyCourtTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PocketPartyCourtTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		000000000000000000000063 = {isa = PBXGroup; children = (
-			000000000000000000000064 /* App */,
-			000000000000000000000065 /* Tests */,
-			000000000000000000000067 /* Frameworks */,
-			000000000000000000000066 /* Products */,
+		000000000000000000000065 = {isa = PBXGroup; children = (
+			000000000000000000000066 /* App */,
+			000000000000000000000067 /* Tests */,
+			000000000000000000000069 /* Frameworks */,
+			000000000000000000000068 /* Products */,
 		); sourceTree = "<group>"; };
-		000000000000000000000064 /* App */ = {isa = PBXGroup; children = (
+		000000000000000000000066 /* App */ = {isa = PBXGroup; children = (
 			000000000000000000000001 /* PocketPartyCourtApp.swift */,
 			000000000000000000000003 /* AnalyticsEvent.swift */,
 			000000000000000000000005 /* AnalyticsService.swift */,
@@ -156,62 +158,64 @@
 			000000000000000000000035 /* DeckCard.swift */,
 			000000000000000000000037 /* DeckDetailView.swift */,
 			000000000000000000000039 /* DeckListView.swift */,
-			00000000000000000000003B /* PaywallView.swift */,
-			00000000000000000000003D /* ArgumentTimerView.swift */,
-			00000000000000000000003F /* CaseRevealView.swift */,
-			000000000000000000000041 /* GameContainerView.swift */,
-			000000000000000000000043 /* GameSetupView.swift */,
-			000000000000000000000045 /* VerdictCardView.swift */,
-			000000000000000000000047 /* VerdictView.swift */,
-			000000000000000000000049 /* VotingView.swift */,
+			00000000000000000000003B /* ArgumentTimerView.swift */,
+			00000000000000000000003D /* CaseRevealView.swift */,
+			00000000000000000000003F /* GameContainerView.swift */,
+			000000000000000000000041 /* GameSetupView.swift */,
+			000000000000000000000043 /* VerdictCardView.swift */,
+			000000000000000000000045 /* VerdictView.swift */,
+			000000000000000000000047 /* VotingView.swift */,
+			000000000000000000000049 /* WinnerView.swift */,
 			00000000000000000000004B /* HistoryView.swift */,
 			00000000000000000000004D /* HomeView.swift */,
 			00000000000000000000004F /* HomeViewModel.swift */,
 			000000000000000000000051 /* StarterDecks.json */,
 			000000000000000000000053 /* Assets.xcassets */,
+			000000000000000000000055 /* PrivacyInfo.xcprivacy */,
 		); name = App; sourceTree = "<group>"; };
-		000000000000000000000065 /* Tests */ = {isa = PBXGroup; children = (
-			000000000000000000000055 /* DeckServiceTests.swift */,
-			000000000000000000000057 /* GameStoreTests.swift */,
-			000000000000000000000059 /* HistoryAndAnalyticsTests.swift */,
-			00000000000000000000005B /* JuryRulesTests.swift */,
-			00000000000000000000005D /* ShareServicePrivacyTests.swift */,
-			00000000000000000000005F /* VerdictEngineTests.swift */,
+		000000000000000000000067 /* Tests */ = {isa = PBXGroup; children = (
+			000000000000000000000057 /* DeckServiceTests.swift */,
+			000000000000000000000059 /* GameStoreTests.swift */,
+			00000000000000000000005B /* HistoryAndAnalyticsTests.swift */,
+			00000000000000000000005D /* JuryRulesTests.swift */,
+			00000000000000000000005F /* ShareServicePrivacyTests.swift */,
+			000000000000000000000061 /* VerdictEngineTests.swift */,
 		); name = Tests; sourceTree = "<group>"; };
-		000000000000000000000067 /* Frameworks */ = {isa = PBXGroup; children = (); name = Frameworks; sourceTree = "<group>"; };
-		000000000000000000000066 /* Products */ = {isa = PBXGroup; children = (
-			000000000000000000000061 /* PocketPartyCourt.app */,
-			000000000000000000000062 /* PocketPartyCourtTests.xctest */,
+		000000000000000000000069 /* Frameworks */ = {isa = PBXGroup; children = (); name = Frameworks; sourceTree = "<group>"; };
+		000000000000000000000068 /* Products */ = {isa = PBXGroup; children = (
+			000000000000000000000063 /* PocketPartyCourt.app */,
+			000000000000000000000064 /* PocketPartyCourtTests.xctest */,
 		); name = Products; sourceTree = "<group>"; };
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		000000000000000000000068 /* PocketPartyCourt */ = {isa = PBXNativeTarget; buildConfigurationList = 000000000000000000000070; buildPhases = (
-			00000000000000000000006A,
+		00000000000000000000006A /* PocketPartyCourt */ = {isa = PBXNativeTarget; buildConfigurationList = 000000000000000000000072; buildPhases = (
 			00000000000000000000006C,
-			00000000000000000000006B,
-		); buildRules = (); dependencies = (); name = PocketPartyCourt; productName = PocketPartyCourt; productReference = 000000000000000000000061; productType = "com.apple.product-type.application"; };
-		000000000000000000000069 /* PocketPartyCourtTests */ = {isa = PBXNativeTarget; buildConfigurationList = 000000000000000000000071; buildPhases = (
-			00000000000000000000006D,
 			00000000000000000000006E,
+			00000000000000000000006D,
+		); buildRules = (); dependencies = (); name = PocketPartyCourt; productName = PocketPartyCourt; productReference = 000000000000000000000063; productType = "com.apple.product-type.application"; };
+		00000000000000000000006B /* PocketPartyCourtTests */ = {isa = PBXNativeTarget; buildConfigurationList = 000000000000000000000073; buildPhases = (
+			00000000000000000000006F,
+			000000000000000000000070,
 		); buildRules = (); dependencies = (
-			000000000000000000000079 /* PBXTargetDependency */,
-		); name = PocketPartyCourtTests; productName = PocketPartyCourtTests; productReference = 000000000000000000000062; productType = "com.apple.product-type.bundle.unit-test"; };
+			00000000000000000000007B /* PBXTargetDependency */,
+		); name = PocketPartyCourtTests; productName = PocketPartyCourtTests; productReference = 000000000000000000000064; productType = "com.apple.product-type.bundle.unit-test"; };
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		00000000000000000000006F /* Project object */ = {isa = PBXProject; attributes = { BuildIndependentTargetsInParallel = 1; LastSwiftUpdateCheck = 1600; LastUpgradeCheck = 1600; TargetAttributes = { 000000000000000000000068 = { CreatedOnToolsVersion = 16.0; }; 000000000000000000000069 = { CreatedOnToolsVersion = 16.0; TestTargetID = 000000000000000000000068; }; }; }; buildConfigurationList = 000000000000000000000072; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en, Base); mainGroup = 000000000000000000000063; productRefGroup = 000000000000000000000066; projectDirPath = ""; projectRoot = ""; targets = (000000000000000000000068, 000000000000000000000069); };
+		000000000000000000000071 /* Project object */ = {isa = PBXProject; attributes = { BuildIndependentTargetsInParallel = 1; LastSwiftUpdateCheck = 1600; LastUpgradeCheck = 1600; TargetAttributes = { 00000000000000000000006A = { CreatedOnToolsVersion = 16.0; }; 00000000000000000000006B = { CreatedOnToolsVersion = 16.0; TestTargetID = 00000000000000000000006A; }; }; }; buildConfigurationList = 000000000000000000000074; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en, Base); mainGroup = 000000000000000000000065; productRefGroup = 000000000000000000000068; projectDirPath = ""; projectRoot = ""; targets = (00000000000000000000006A, 00000000000000000000006B); };
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		00000000000000000000006B = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (
+		00000000000000000000006D = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (
 			000000000000000000000052 /* StarterDecks.json in Resources */,
 			000000000000000000000054 /* Assets.xcassets in Resources */,
+			000000000000000000000056 /* PrivacyInfo.xcprivacy in Resources */,
 		); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		00000000000000000000006A = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (
+		00000000000000000000006C = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (
 			000000000000000000000002 /* PocketPartyCourtApp.swift in Sources */,
 			000000000000000000000004 /* AnalyticsEvent.swift in Sources */,
 			000000000000000000000006 /* AnalyticsService.swift in Sources */,
@@ -241,51 +245,51 @@
 			000000000000000000000036 /* DeckCard.swift in Sources */,
 			000000000000000000000038 /* DeckDetailView.swift in Sources */,
 			00000000000000000000003A /* DeckListView.swift in Sources */,
-			00000000000000000000003C /* PaywallView.swift in Sources */,
-			00000000000000000000003E /* ArgumentTimerView.swift in Sources */,
-			000000000000000000000040 /* CaseRevealView.swift in Sources */,
-			000000000000000000000042 /* GameContainerView.swift in Sources */,
-			000000000000000000000044 /* GameSetupView.swift in Sources */,
-			000000000000000000000046 /* VerdictCardView.swift in Sources */,
-			000000000000000000000048 /* VerdictView.swift in Sources */,
-			00000000000000000000004A /* VotingView.swift in Sources */,
+			00000000000000000000003C /* ArgumentTimerView.swift in Sources */,
+			00000000000000000000003E /* CaseRevealView.swift in Sources */,
+			000000000000000000000040 /* GameContainerView.swift in Sources */,
+			000000000000000000000042 /* GameSetupView.swift in Sources */,
+			000000000000000000000044 /* VerdictCardView.swift in Sources */,
+			000000000000000000000046 /* VerdictView.swift in Sources */,
+			000000000000000000000048 /* VotingView.swift in Sources */,
+			00000000000000000000004A /* WinnerView.swift in Sources */,
 			00000000000000000000004C /* HistoryView.swift in Sources */,
 			00000000000000000000004E /* HomeView.swift in Sources */,
 			000000000000000000000050 /* HomeViewModel.swift in Sources */,
 		); runOnlyForDeploymentPostprocessing = 0; };
-		00000000000000000000006D = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (
-			000000000000000000000056 /* DeckServiceTests.swift in Sources */,
-			000000000000000000000058 /* GameStoreTests.swift in Sources */,
-			00000000000000000000005A /* HistoryAndAnalyticsTests.swift in Sources */,
-			00000000000000000000005C /* JuryRulesTests.swift in Sources */,
-			00000000000000000000005E /* ShareServicePrivacyTests.swift in Sources */,
-			000000000000000000000060 /* VerdictEngineTests.swift in Sources */,
+		00000000000000000000006F = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (
+			000000000000000000000058 /* DeckServiceTests.swift in Sources */,
+			00000000000000000000005A /* GameStoreTests.swift in Sources */,
+			00000000000000000000005C /* HistoryAndAnalyticsTests.swift in Sources */,
+			00000000000000000000005E /* JuryRulesTests.swift in Sources */,
+			000000000000000000000060 /* ShareServicePrivacyTests.swift in Sources */,
+			000000000000000000000062 /* VerdictEngineTests.swift in Sources */,
 		); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		00000000000000000000006C = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
 		00000000000000000000006E = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		000000000000000000000070 = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		000000000000000000000079 /* PBXTargetDependency */ = {isa = PBXTargetDependency; target = 000000000000000000000068 /* PocketPartyCourt */; targetProxy = 00000000000000000000007A /* PBXContainerItemProxy */; };
+		00000000000000000000007B /* PBXTargetDependency */ = {isa = PBXTargetDependency; target = 00000000000000000000006A /* PocketPartyCourt */; targetProxy = 00000000000000000000007C /* PBXContainerItemProxy */; };
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		000000000000000000000073 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = { ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; ENABLE_PREVIEWS = YES; GENERATE_INFOPLIST_FILE = YES; INFOPLIST_KEY_CFBundleDisplayName = "Pocket Party Court"; INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES; INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES; INFOPLIST_KEY_UILaunchScreen_Generation = YES; INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait; INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.pocketpartycourt.app; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SWIFT_EMIT_LOC_STRINGS = YES; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; ENABLE_TESTABILITY = YES; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; ONLY_ACTIVE_ARCH = YES; DEBUG_INFORMATION_FORMAT = dwarf; }; name = Debug; };
-		000000000000000000000074 /* Release */ = {isa = XCBuildConfiguration; buildSettings = { ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; ENABLE_PREVIEWS = YES; GENERATE_INFOPLIST_FILE = YES; INFOPLIST_KEY_CFBundleDisplayName = "Pocket Party Court"; INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES; INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES; INFOPLIST_KEY_UILaunchScreen_Generation = YES; INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait; INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.pocketpartycourt.app; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SWIFT_EMIT_LOC_STRINGS = YES; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; SWIFT_OPTIMIZATION_LEVEL = "-O"; SWIFT_COMPILATION_MODE = wholemodule; DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym"; ENABLE_NS_ASSERTIONS = NO; VALIDATE_PRODUCT = YES; }; name = Release; };
-		000000000000000000000075 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = { BUNDLE_LOADER = "$(TEST_HOST)"; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; GENERATE_INFOPLIST_FILE = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.pocketpartycourt.app.tests; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SWIFT_EMIT_LOC_STRINGS = NO; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PocketPartyCourt.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PocketPartyCourt"; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; ONLY_ACTIVE_ARCH = YES; }; name = Debug; };
-		000000000000000000000076 /* Release */ = {isa = XCBuildConfiguration; buildSettings = { BUNDLE_LOADER = "$(TEST_HOST)"; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; GENERATE_INFOPLIST_FILE = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.pocketpartycourt.app.tests; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SWIFT_EMIT_LOC_STRINGS = NO; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PocketPartyCourt.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PocketPartyCourt"; SWIFT_OPTIMIZATION_LEVEL = "-O"; SWIFT_COMPILATION_MODE = wholemodule; }; name = Release; };
-		000000000000000000000077 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ANALYZER_NONNULL = YES; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; ENABLE_STRICT_OBJC_MSGSEND = YES; GCC_C_LANGUAGE_STANDARD = gnu17; GCC_NO_COMMON_BLOCKS = YES; SWIFT_VERSION = 5.0;  }; name = Debug; };
-		000000000000000000000078 /* Release */ = {isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ANALYZER_NONNULL = YES; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; ENABLE_STRICT_OBJC_MSGSEND = YES; GCC_C_LANGUAGE_STANDARD = gnu17; GCC_NO_COMMON_BLOCKS = YES; SWIFT_VERSION = 5.0;  }; name = Release; };
+		000000000000000000000075 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = { ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; ENABLE_PREVIEWS = YES; GENERATE_INFOPLIST_FILE = YES; INFOPLIST_KEY_CFBundleDisplayName = "Pocket Party Court"; INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO; INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.family-games"; INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES; INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES; INFOPLIST_KEY_UILaunchScreen_Generation = YES; INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait; INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.pocketpartycourt.app; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SWIFT_EMIT_LOC_STRINGS = YES; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; ENABLE_TESTABILITY = YES; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; ONLY_ACTIVE_ARCH = YES; DEBUG_INFORMATION_FORMAT = dwarf; }; name = Debug; };
+		000000000000000000000076 /* Release */ = {isa = XCBuildConfiguration; buildSettings = { ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; ENABLE_PREVIEWS = YES; GENERATE_INFOPLIST_FILE = YES; INFOPLIST_KEY_CFBundleDisplayName = "Pocket Party Court"; INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO; INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.family-games"; INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES; INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES; INFOPLIST_KEY_UILaunchScreen_Generation = YES; INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait; INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.pocketpartycourt.app; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SWIFT_EMIT_LOC_STRINGS = YES; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; SWIFT_OPTIMIZATION_LEVEL = "-O"; SWIFT_COMPILATION_MODE = wholemodule; DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym"; ENABLE_NS_ASSERTIONS = NO; VALIDATE_PRODUCT = YES; }; name = Release; };
+		000000000000000000000077 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = { BUNDLE_LOADER = "$(TEST_HOST)"; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; GENERATE_INFOPLIST_FILE = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.pocketpartycourt.app.tests; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SWIFT_EMIT_LOC_STRINGS = NO; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PocketPartyCourt.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PocketPartyCourt"; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; ONLY_ACTIVE_ARCH = YES; }; name = Debug; };
+		000000000000000000000078 /* Release */ = {isa = XCBuildConfiguration; buildSettings = { BUNDLE_LOADER = "$(TEST_HOST)"; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; GENERATE_INFOPLIST_FILE = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.pocketpartycourt.app.tests; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SWIFT_EMIT_LOC_STRINGS = NO; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PocketPartyCourt.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PocketPartyCourt"; SWIFT_OPTIMIZATION_LEVEL = "-O"; SWIFT_COMPILATION_MODE = wholemodule; }; name = Release; };
+		000000000000000000000079 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ANALYZER_NONNULL = YES; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; ENABLE_STRICT_OBJC_MSGSEND = YES; GCC_C_LANGUAGE_STANDARD = gnu17; GCC_NO_COMMON_BLOCKS = YES; SWIFT_VERSION = 5.0;  }; name = Debug; };
+		00000000000000000000007A /* Release */ = {isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ANALYZER_NONNULL = YES; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; ENABLE_STRICT_OBJC_MSGSEND = YES; GCC_C_LANGUAGE_STANDARD = gnu17; GCC_NO_COMMON_BLOCKS = YES; SWIFT_VERSION = 5.0;  }; name = Release; };
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		000000000000000000000072 = {isa = XCConfigurationList; buildConfigurations = (000000000000000000000077 /* Debug */, 000000000000000000000078 /* Release */); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
-		000000000000000000000070 = {isa = XCConfigurationList; buildConfigurations = (000000000000000000000073 /* Debug */, 000000000000000000000074 /* Release */); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
-		000000000000000000000071 = {isa = XCConfigurationList; buildConfigurations = (000000000000000000000075 /* Debug */, 000000000000000000000076 /* Release */); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		000000000000000000000074 = {isa = XCConfigurationList; buildConfigurations = (000000000000000000000079 /* Debug */, 00000000000000000000007A /* Release */); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		000000000000000000000072 = {isa = XCConfigurationList; buildConfigurations = (000000000000000000000075 /* Debug */, 000000000000000000000076 /* Release */); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		000000000000000000000073 = {isa = XCConfigurationList; buildConfigurations = (000000000000000000000077 /* Debug */, 000000000000000000000078 /* Release */); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
 /* End XCConfigurationList section */
 	};
-	rootObject = 00000000000000000000006F /* Project object */;
+	rootObject = 000000000000000000000071 /* Project object */;
 }

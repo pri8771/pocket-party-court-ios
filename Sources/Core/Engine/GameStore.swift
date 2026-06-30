@@ -23,6 +23,8 @@ final class GameStore {
     /// playerID → guilty(true)/notGuilty(false). Absent = not yet voted.
     private(set) var votes: [UUID: Bool] = [:]
     private(set) var lastResult: VerdictResult?
+    /// playerID → cases won as a litigant. Drives the "crown a winner" finale.
+    private(set) var scores: [UUID: Int] = [:]
 
     var argumentDuration: Int
 
@@ -56,6 +58,22 @@ final class GameStore {
 
     var plaintiffName: String { plaintiff?.name ?? "Plaintiff" }
     var defendantName: String { defendant?.name ?? "Defendant" }
+
+    /// Players ranked by cases won (desc), ties broken by entry order.
+    var standings: [(player: RoundPlayer, score: Int)] {
+        players
+            .map { ($0, scores[$0.id] ?? 0) }
+            .sorted { $0.1 > $1.1 }
+    }
+
+    /// The top scorer(s). Empty if nobody has won a case yet (all hung juries).
+    var winners: [RoundPlayer] {
+        let top = standings.first?.score ?? 0
+        guard top > 0 else { return [] }
+        return standings.filter { $0.score == top }.map(\.player)
+    }
+
+    func score(for player: RoundPlayer) -> Int { scores[player.id] ?? 0 }
 
     // MARK: Transitions
 
@@ -101,21 +119,35 @@ final class GameStore {
             defendantName: defendantName
         )
         lastResult = result
+        awardPoint(for: result.verdict)
         casesPlayed += 1
         phase = .verdict
         return result
     }
 
-    /// verdict → caseReveal with the same roles and a fresh case.
-    /// Reachable from every verdict (guilty / notGuilty / hungJury).
+    /// Awards the winning litigant a point. A hung jury awards nothing.
+    private func awardPoint(for verdict: Verdict) {
+        let winnerID: UUID?
+        switch verdict {
+        case .guilty: winnerID = plaintiff?.id
+        case .notGuilty: winnerID = defendant?.id
+        case .hungJury: winnerID = nil
+        }
+        if let winnerID { scores[winnerID, default: 0] += 1 }
+    }
+
+    /// verdict → caseReveal, rotating roles so a different pair argues and the
+    /// spotlight (and scoring chances) move around the room. Reachable from
+    /// every verdict (guilty / notGuilty / hungJury).
     func nextCase() {
         guard phase == .verdict else { return }
         votes = [:]
+        rotateRoles()
         drawNextCase()
         phase = .caseReveal
     }
 
-    /// verdict → caseReveal, rotating roles so a different pair argues.
+    /// verdict → caseReveal, rotating roles and bumping the round counter.
     /// Also reachable from every verdict.
     func newRound() {
         guard phase == .verdict else { return }
@@ -126,6 +158,19 @@ final class GameStore {
         phase = .caseReveal
     }
 
+    /// verdict → finale. Shows the "crown the winner" leaderboard.
+    func crownWinner() {
+        guard phase == .verdict else { return }
+        phase = .finale
+    }
+
+    /// finale → caseReveal. Starts a fresh game with the same roster, clearing
+    /// scores and the draw pile.
+    func playAgain() {
+        restart()
+        beginCase()
+    }
+
     /// Hard reset back to setup, keeping the player roster and deck.
     func restart() {
         phase = .setup
@@ -134,6 +179,7 @@ final class GameStore {
         round = 1
         casesPlayed = 0
         lastResult = nil
+        scores = [:]
         drawPile = allCases
         players = JuryRules.assignRoles(to: players)
     }
