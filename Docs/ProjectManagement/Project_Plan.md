@@ -16,3 +16,19 @@
 ## Task 2B plan update - 2026-06-28
 - Completed engineering review fixes before advancing to additional gameplay scope.
 - Next recommended work: address deferred GameSession save/idempotency and 3-player jury behavior bugs before expanding gameplay modes.
+
+## v1 full build - 2026-06-30
+
+Executed the locked PR0–PR4 plan from the agent planning thread.
+
+| PR | Scope | Status |
+| --- | --- | --- |
+| PR0 | Source audit (engine vs. scaffolding, seeding, vote handling) | Done |
+| PR1 | Full-case state machine with three-way verdict (`GameStore`, `VerdictEngine`) | Done |
+| PR2 | Party-reality hardening (add/drop player, restart, backgrounding, obvious next action) | Done |
+| PR3 | Deck safety pass + argument hints + work-safe flag | Done |
+| PR4 | Privacy-safe verdict card as a branded growth asset | Done |
+| + | Design system, app icon, paywall/IAP scaffold, About, test target, CI fix | Done |
+
+Verified: build + run on iOS 26 simulator, 32 unit tests passing, all screens
+visually reviewed.

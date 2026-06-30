@@ -1,5 +1,34 @@
 # Changelog
 
+## 1.0.0 - 2026-06-30 — Full v1 build
+
+Closes the canonical build-to scope in `LAUNCH_READINESS.md` (readiness 28% → ~82%).
+
+### Engine
+- Added `GameStore`, a UI- and SwiftData-free full-case state machine: setup → case reveal → arguments → voting → verdict, looping to next case / new round from **every** verdict.
+- Introduced the `Verdict` enum (`guilty | notGuilty | hungJury`); the tally is a total function with exact ties → hung jury.
+- **Multi-case loop + scoring + "crown the winner" finale:** "Next Case" rotates roles so the spotlight moves around the room; the winning litigant scores a point each case; a finale leaderboard crowns the top scorer(s). (`WinnerView`, `GameStore.scores/standings/winners`.)
+- Fixed the 3-player jury bug: `JuryRules` guarantees a non-empty voter set for 2–8 players (litigants argue; judge + jury vote; both litigants vote in a 2-player game).
+- Party-reality hardening: add a latecomer (joins jury) or drop a player mid-round without ending the game; safe role reassignment when a litigant leaves; restart; votes live in the store so backgrounding mid-vote is safe.
+- Replaced silent `try?` session saves with explicit, non-blocking error handling.
+
+### Content
+- Tone-reviewed the starter decks (sign-off in `Docs/Content/Deck_Tone_Signoff.md`) and added per-case argument hints, accent colors, and a work-safe flag (Office Chaos Court is the work-safe icebreaker deck). Four free decks, 40 cases.
+- **No monetization in v1** (per `LAUNCH_READINESS.md` §3): Date Night Court ships **free**; the paywall was removed and `StoreService` is an inert stub. Deck packs remain a documented *future* model.
+
+### Verdict card & sharing
+- Branded, screenshot-perfect, privacy-safe verdict card (wordmark, case, verdict stamp, winner, tagline). It carries **no** vote breakdown or per-voter data, enforced by tests. The verdict screen also shows a running standings strip.
+
+### Design ("Claude design")
+- New "playful courtroom" design system: dynamic light/dark color tokens, dual rounded/serif type scale, reusable components, vector gavel mark, countdown ring, rubber-stamp verdict, and a confetti reveal. Redesigned every screen plus a new About screen, the winner finale, and an app icon + accent color asset catalog.
+
+### Store readiness & project
+- Added the app icon, `PrivacyInfo.xcprivacy` (no tracking, no data collected), and `ITSAppUsesNonExemptEncryption = NO`.
+- History gained per-item delete and a "Clear all" control.
+- Regenerated the Xcode project with `SDKROOT = iphoneos` (fixes iOS-destination resolution) and a registered `PocketPartyCourtTests` target.
+- **37 unit tests** (engine, jury, verdict, scoring/finale, share-privacy, seeding, history) — all passing on an iOS 26 simulator.
+- Fixed the CI workflow's broken `xcodebuild` line continuation.
+
 ## 0.1.0
 - Added initial iOS project scaffold.
 - Added SwiftUI feature screens.

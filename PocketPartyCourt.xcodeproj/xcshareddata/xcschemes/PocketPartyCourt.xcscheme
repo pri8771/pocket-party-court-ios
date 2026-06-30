@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1500"
+   LastUpgradeVersion = "1600"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
-      buildImplicitDependencies = "YES"
-      buildArchitectures = "Automatic">
+      buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -15,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "000000000000000000000034"
+               BlueprintIdentifier = "000000000000000000000068"
                BuildableName = "PocketPartyCourt.app"
                BlueprintName = "PocketPartyCourt"
                ReferencedContainer = "container:PocketPartyCourt.xcodeproj">
@@ -29,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "000000000000000000000069"
+               BuildableName = "PocketPartyCourtTests.xctest"
+               BlueprintName = "PocketPartyCourtTests"
+               ReferencedContainer = "container:PocketPartyCourt.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -45,7 +54,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "000000000000000000000034"
+            BlueprintIdentifier = "000000000000000000000068"
             BuildableName = "PocketPartyCourt.app"
             BlueprintName = "PocketPartyCourt"
             ReferencedContainer = "container:PocketPartyCourt.xcodeproj">
@@ -62,7 +71,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "000000000000000000000034"
+            BlueprintIdentifier = "000000000000000000000068"
             BuildableName = "PocketPartyCourt.app"
             BlueprintName = "PocketPartyCourt"
             ReferencedContainer = "container:PocketPartyCourt.xcodeproj">

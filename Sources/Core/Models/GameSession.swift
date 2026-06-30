@@ -1,6 +1,9 @@
 import Foundation
 import SwiftData
 
+/// A completed case, persisted for the local History view. Only privacy-safe
+/// data is stored: deck, case prompt, outcome, vote totals (not who voted
+/// what), and the participating players. Nothing leaves the device.
 @Model
 final class GameSession {
     var id: UUID
@@ -12,7 +15,10 @@ final class GameSession {
     var casePrompt: String
     var guiltyVotes: Int
     var notGuiltyVotes: Int
+    /// Human-readable verdict title (kept for display + back-compat).
     var verdictTitle: String
+    /// Raw `Verdict` value so History can recover the typed outcome + tint.
+    var verdictRawValue: String
     var verdictSummary: String
     @Relationship(deleteRule: .cascade) var players: [Player]
 
@@ -27,6 +33,7 @@ final class GameSession {
         guiltyVotes: Int = 0,
         notGuiltyVotes: Int = 0,
         verdictTitle: String = "",
+        verdictRawValue: String = "",
         verdictSummary: String = "",
         players: [Player] = []
     ) {
@@ -40,7 +47,14 @@ final class GameSession {
         self.guiltyVotes = guiltyVotes
         self.notGuiltyVotes = notGuiltyVotes
         self.verdictTitle = verdictTitle
+        self.verdictRawValue = verdictRawValue
         self.verdictSummary = verdictSummary
         self.players = players
+    }
+
+    /// Typed outcome, recovered from the raw value (falls back via title).
+    var verdict: Verdict? {
+        Verdict(rawValue: verdictRawValue)
+            ?? Verdict.allCases.first { $0.title == verdictTitle }
     }
 }

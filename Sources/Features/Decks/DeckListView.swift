@@ -2,19 +2,28 @@ import SwiftData
 import SwiftUI
 
 struct DeckListView: View {
-    @Query(sort: \CaseDeck.title) private var decks: [CaseDeck]
+    @Query(sort: \CaseDeck.sortIndex) private var decks: [CaseDeck]
 
     var body: some View {
-        List(decks) { deck in
-            NavigationLink(destination: DeckDetailView(deck: deck)) {
-                VStack(alignment: .leading) {
-                    Text("\(deck.icon) \(deck.title)")
-                        .font(PPCTypography.title)
-                    Text(deck.deckDescription)
-                        .font(PPCTypography.caption)
+        ScrollView {
+            VStack(spacing: 14) {
+                Text("Every prompt is local to your device. Tap a deck to read its cases.")
+                    .font(PPCTypography.caption)
+                    .foregroundStyle(PPCColors.inkSecondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                ForEach(decks) { deck in
+                    NavigationLink {
+                        DeckDetailView(deck: deck)
+                    } label: {
+                        DeckCard(deck: deck)
+                    }
+                    .buttonStyle(PPCPressStyle())
                 }
             }
+            .padding(20)
         }
-        .navigationTitle("Decks")
+        .ppcScreenBackground()
+        .navigationTitle("All Decks")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }

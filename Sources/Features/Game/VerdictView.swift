@@ -1,116 +1,204 @@
 import SwiftData
 import SwiftUI
 
-struct VerdictCardView: View {
-    let deckTitle: String
-    let casePrompt: String
-    let result: VerdictResult
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("⚖️ Pocket Party Court")
-                .font(.system(size: 28, weight: .black, design: .rounded))
-            Text(result.title)
-                .font(.system(size: 44, weight: .black, design: .rounded))
-            Text(casePrompt)
-                .font(.system(size: 18, weight: .semibold, design: .rounded))
-            Text("Guilty \(result.guiltyVotes) • Not Guilty \(result.notGuiltyVotes)")
-                .font(.system(size: 16, weight: .bold, design: .rounded))
-            Text(result.summary)
-                .font(.system(size: 17, design: .rounded))
-        }
-        .padding(28)
-        .frame(width: 600, alignment: .leading)
-        .background(PPCColors.paper)
-    }
-}
-
+/// The payoff: gavel falls, stamp slams, confetti, and the group gets a
+/// shareable card. From here every verdict (guilty / not guilty / hung jury)
+/// can loop to the next case, rotate roles for a new round, or end the game.
 struct VerdictView: View {
     @Environment(\.modelContext) private var modelContext
-    let deck: CaseDeck
-    let gameCase: GameCase
-    let players: [Player]
-    let guiltyVotes: Int
-    let notGuiltyVotes: Int
+    let store: GameStore
+    var deckAccent: Color = PPCColors.gavel
+    var onExit: () -> Void
 
     @State private var shareURL: URL?
-    @State private var didSaveSession = false
+    @State private var didPersist = false
 
-    private var plaintiffName: String { players.first(where: { $0.role == .plaintiff })?.name ?? "Plaintiff" }
-    private var defendantName: String { players.first(where: { $0.role == .defendant })?.name ?? "Defendant" }
-    private var result: VerdictResult {
-        GameService().verdict(guiltyVotes: guiltyVotes, notGuiltyVotes: notGuiltyVotes, plaintiffName: plaintiffName, defendantName: defendantName)
-    }
+    private var result: VerdictResult? { store.lastResult }
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                Text("Verdict")
-                    .font(PPCTypography.hero)
-                VerdictCardView(deckTitle: deck.title, casePrompt: gameCase.prompt, result: result)
-                    .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-                    .shadow(color: .black.opacity(0.08), radius: 12, y: 6)
-                    .padding(.horizontal)
-                Text("Winner: \(result.winnerName)")
-                    .font(PPCTypography.title)
-                if let shareURL {
-                    ShareLink(item: shareURL) {
-                        Label("Share Verdict Card", systemImage: "square.and.arrow.up")
+        ZStack {
+            if let result {
+                ScrollView {
+                    VStack(spacing: 20) {
+                        Text("THE VERDICT")
+                            .ppcEyebrow(PPCColors.robe)
+                            .padding(.top, 8)
+
+                        VerdictStamp(verdict: result.verdict, animated: true)
+                            .padding(.vertical, 6)
+
+                        if let gameCase = store.currentCase {
+                            VerdictCardView(deckTitle: store.deck.title, casePrompt: gameCase.prompt, result: result)
+                                .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+                                .shadow(color: .black.opacity(0.1), radius: 16, y: 8)
+                        }
+
+                        Text(result.summary)
+                            .font(PPCTypography.callout)
+                            .multilineTextAlignment(.center)
+                            .foregroundStyle(PPCColors.inkSecondary)
+                            .padding(.horizontal, 24)
+
+                        standingsStrip
+
+                        shareButton(result: result)
+                        actionButtons
                     }
-                    .buttonStyle(.borderedProminent)
-                } else {
-                    ProgressView("Preparing share card…")
+                    .padding(20)
+                    .padding(.bottom, 24)
                 }
+                ConfettiView()
+                    .ignoresSafeArea()
             }
-            .padding()
         }
-        .navigationTitle("Verdict")
         .onAppear {
             AnalyticsService.shared.track(.verdictGenerated)
+            persistIfNeeded()
         }
-        .task {
-            if !didSaveSession {
-                saveCompletedSession()
-                didSaveSession = true
+        .task { shareURL = await renderShareCard() }
+    }
+
+    // MARK: Buttons
+
+    private func shareButton(result: VerdictResult) -> some View {
+        Group {
+            if let shareURL {
+                ShareLink(
+                    item: shareURL,
+                    message: Text(ShareService().verdictCardText(
+                        deckTitle: store.deck.title,
+                        casePrompt: store.currentCase?.prompt ?? "",
+                        result: result
+                    )),
+                    preview: SharePreview("Pocket Party Court Verdict", image: shareURL)
+                ) {
+                    Label("Share the Verdict Card", systemImage: "square.and.arrow.up")
+                        .font(PPCTypography.bodyEmphasis.weight(.bold))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
+                        .foregroundStyle(.white)
+                        .background(PPCColors.robe)
+                        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                }
+                .simultaneousGesture(TapGesture().onEnded {
+                    AnalyticsService.shared.track(.verdictShared)
+                })
+            } else {
+                HStack(spacing: 8) {
+                    ProgressView()
+                    Text("Preparing share card…").font(PPCTypography.caption).foregroundStyle(PPCColors.inkSecondary)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 16)
             }
-            shareURL = renderShareCard()
         }
     }
 
-    private func saveCompletedSession() {
-        let sessionPlayers = players.map { player in
-            Player(name: player.name, emoji: player.emoji, score: player.score, role: player.role)
+    private var standingsStrip: some View {
+        let standings = store.standings
+        return Group {
+            if store.casesPlayed > 1 {
+                VStack(spacing: 8) {
+                    Text("Standings · \(store.casesPlayed) cases")
+                        .ppcEyebrow(PPCColors.inkSecondary)
+                    HStack(spacing: 10) {
+                        ForEach(standings.prefix(4), id: \.player.id) { entry in
+                            VStack(spacing: 2) {
+                                Text(entry.player.emoji)
+                                Text("\(entry.score)")
+                                    .font(PPCTypography.bodyEmphasis)
+                                    .foregroundStyle(entry.score > 0 ? PPCColors.gavel : PPCColors.inkSecondary)
+                            }
+                        }
+                    }
+                }
+                .padding(.vertical, 10)
+                .frame(maxWidth: .infinity)
+                .background(PPCColors.paper.opacity(0.6))
+                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+            }
+        }
+    }
+
+    private var actionButtons: some View {
+        VStack(spacing: 12) {
+            PPCPrimaryButton(title: "Next Case", icon: "arrow.right.circle.fill") {
+                AnalyticsService.shared.track(.nextCaseStarted)
+                reset()
+                store.nextCase()
+            }
+            HStack(spacing: 12) {
+                PPCSecondaryButton(title: "Crown Winner", icon: "crown.fill") {
+                    AnalyticsService.shared.track(.winnerCrowned)
+                    store.crownWinner()
+                }
+                PPCSecondaryButton(title: "End Game", icon: "flag.checkered") {
+                    AnalyticsService.shared.track(.gameExited)
+                    onExit()
+                }
+            }
+        }
+    }
+
+    // MARK: Persistence (privacy-safe)
+
+    private func persistIfNeeded() {
+        guard !didPersist, let snapshot = store.makeCompletedSnapshot() else { return }
+        didPersist = true
+        let players = snapshot.players.map {
+            Player(name: $0.name, emoji: $0.emoji, role: $0.role)
         }
         let session = GameSession(
             completedAt: .now,
-            selectedDeckTitle: deck.title,
-            casePrompt: gameCase.prompt,
-            guiltyVotes: guiltyVotes,
-            notGuiltyVotes: notGuiltyVotes,
-            verdictTitle: result.title,
-            verdictSummary: result.summary,
-            players: sessionPlayers
+            currentRound: store.round,
+            totalRounds: store.round,
+            selectedDeckTitle: snapshot.deckTitle,
+            casePrompt: snapshot.casePrompt,
+            guiltyVotes: snapshot.guiltyVotes,
+            notGuiltyVotes: snapshot.notGuiltyVotes,
+            verdictTitle: snapshot.verdictTitle,
+            verdictRawValue: snapshot.verdict.rawValue,
+            verdictSummary: snapshot.verdictSummary,
+            players: players
         )
         modelContext.insert(session)
-        try? modelContext.save()
-        AnalyticsService.shared.track(.sessionSaved)
+        do {
+            try modelContext.save()
+            AnalyticsService.shared.track(.sessionSaved)
+        } catch {
+            // History is a nicety, not the game — a failed save must never block
+            // the room. Drop the unsaved insert and carry on.
+            modelContext.delete(session)
+        }
     }
 
+    private func reset() {
+        shareURL = nil
+        didPersist = false
+    }
+
+    // MARK: Share card rendering
+
     @MainActor
-    private func renderShareCard() -> URL? {
-        let renderer = ImageRenderer(content: VerdictCardView(deckTitle: deck.title, casePrompt: gameCase.prompt, result: result))
-        renderer.scale = 2
+    private func renderShareCard() async -> URL? {
+        guard let result, let gameCase = store.currentCase else { return nil }
+        let renderer = ImageRenderer(
+            content: VerdictCardView(deckTitle: store.deck.title, casePrompt: gameCase.prompt, result: result)
+                .padding(16)
+                .background(PPCColors.background)
+        )
+        renderer.scale = 3
 
         #if canImport(UIKit)
-        guard let image = renderer.uiImage,
-              let data = image.pngData() else { return nil }
+        guard let image = renderer.uiImage, let data = image.pngData() else { return nil }
         #else
-        guard let image = renderer.cgImage else { return nil }
-        let bitmap = NSBitmapImageRep(cgImage: image)
+        guard let cg = renderer.cgImage else { return nil }
+        let bitmap = NSBitmapImageRep(cgImage: cg)
         guard let data = bitmap.representation(using: .png, properties: [:]) else { return nil }
         #endif
 
-        let url = FileManager.default.temporaryDirectory.appendingPathComponent("pocket-party-court-verdict-\(UUID().uuidString).png")
+        let url = FileManager.default.temporaryDirectory
+            .appendingPathComponent("pocket-party-court-verdict-\(UUID().uuidString).png")
         try? data.write(to: url)
         return url
     }

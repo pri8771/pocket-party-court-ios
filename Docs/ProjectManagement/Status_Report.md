@@ -1,24 +1,26 @@
 # Status Report
 
-## Current Status (updated 2026-06-30 — see ../../LAUNCH_READINESS.md)
-**Building (early).** The app plays one case end to end as a SwiftUI navigation flow (deck → players/
-roles → case → timer → vote → verdict → share), with idempotent SwiftData seeding from
-`StarterDecks.json`, a design system, local DEBUG-only analytics, and unit-test files. Estimated
-production-readiness ~40%.
+## Current Status — 2026-06-30 (v1 full build)
+v1 is feature-complete and ~80–90% production-ready. Built, run, and verified on
+iOS 26 simulators (Xcode 16); 32 unit tests pass; zero source warnings.
 
-**Top open items (full triage in LAUNCH_READINESS.md §7):**
-- No multi-case loop / scoring / "crown a winner" (single-case flow only).
-- No central restart-safe game-state machine; state is navigation-bound; no add/drop players mid-game.
-- 3-player voting bug: no jury voter; the judge decides alone.
-- Unit tests are not registered in the Xcode project, so CI runs zero tests.
-- Missing app icon and `PrivacyInfo.xcprivacy`; `PRIVACY_POLICY.md`/`TERMS_OF_SERVICE.md` reconciled
-  this pass.
-- App has not been verified to build/run on real macOS/Xcode yet.
+Delivered against the canonical scope in `LAUNCH_READINESS.md` (readiness 28% → ~82%):
+- **Engine:** `GameStore` restart-safe state machine; `Verdict` three-way tally (tie → hung jury); multi-case loop with **per-case scoring and a "crown the winner" finale**; next case / new round reachable from every verdict.
+- **Party hardening:** add/drop player mid-round, safe restart, votes survive backgrounding, obvious next action at every step.
+- **Content:** tone-reviewed decks (sign-off recorded) with argument hints + accent colors; Office Chaos Court flagged work-safe. Four **free** decks — no monetization in v1.
+- **Verdict card:** branded, screenshot-perfect, privacy-safe (no vote breakdown).
+- **Design:** full "playful courtroom" design system, every screen redesigned, app icon + accent color, About + winner screens.
+- **Store readiness:** `PrivacyInfo.xcprivacy`, `ITSAppUsesNonExemptEncryption=NO`, History clear/delete.
+- **Project/CI:** `SDKROOT = iphoneos` fix, registered test target (37 tests), fixed CI workflow.
+
+## Remaining for 100%
+- App Store assets: screenshots, hosted privacy-policy URL, App Store description/keywords, final privacy questionnaire.
+- Formal accessibility audit; verdict-moment sound.
+- Human gate: the cold 4–6 person play test (see `Docs/Business/Beta_Playtest_Plan.md`).
+- (Future, not v1) live StoreKit deck packs — `StoreService` is an inert stub today.
 
 ## Next Focus
-Get the app building/running on real Xcode and wire the test target into CI; fix 3-player voting;
-build the restart-safe state machine + multi-case loop + scoring + winner screen; add app icon +
-privacy manifest. Persistence seeding from `StarterDecks.json` and the single-case loop are already done.
+Run the cold play-test gate, wire live StoreKit (future monetization), and prep TestFlight.
 
 ## 2026-06-28 - Task 2B status
 - Fixed required Task 2 review issues for stable seeded IDs, idempotent granular seeding, explicit JSON error handling, History view access, and local analytics wiring.

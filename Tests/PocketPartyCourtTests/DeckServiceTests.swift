@@ -15,6 +15,24 @@ final class DeckServiceTests: XCTestCase {
         XCTAssertThrowsError(try DeckService().decodeStarterDecks(from: Data("not json".utf8)))
     }
 
+    func testDecodeReadsDeckMetadata() throws {
+        let json = #"{"decks":[{"id":"d","title":"T","description":"D","icon":"💼","accentHex":"3E7BD6","isWorkSafe":true,"isPremium":true,"productID":"com.x.deck","cases":[{"id":"c","prompt":"P","category":"cat","plaintiffHint":"ph","defendantHint":"dh"}]}]}"#.data(using: .utf8)!
+        let deck = try DeckService().decodeStarterDecks(from: json).first
+        XCTAssertEqual(deck?.accentHex, "3E7BD6")
+        XCTAssertEqual(deck?.isWorkSafe, true)
+        XCTAssertEqual(deck?.isPremium, true)
+        XCTAssertEqual(deck?.productID, "com.x.deck")
+        XCTAssertEqual(deck?.cases.first?.plaintiffHint, "ph")
+    }
+
+    func testBundledCatalogDecodesAndIsFree() throws {
+        // The shipped catalog must stay decodable; v1 ships no paid decks.
+        let decks = try DeckService().loadStarterDecks()
+        XCTAssertGreaterThanOrEqual(decks.count, 4)
+        XCTAssertTrue(decks.contains { $0.isWorkSafe == true })
+        XCTAssertFalse(decks.contains { $0.isPremium == true }, "v1 ships no premium decks")
+    }
+
     func testSeedingIsGranularAndIdempotent() throws {
         let container = try ModelContainer(for: CaseDeck.self, GameCase.self, GameSession.self, Player.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
         let context = container.mainContext

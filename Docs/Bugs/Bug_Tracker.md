@@ -2,6 +2,16 @@
 
 | ID | Title | Severity | Status | Owner | Notes |
 | --- | --- | --- | --- | --- | --- |
+| 6 | GameSession save failures swallowed by `try?` | Medium | Fixed | — | `VerdictView.persistIfNeeded` now uses explicit `do/catch`, rolls back the insert on failure, and never blocks the room. |
+| 7 | Duplicate session risk if save state retriggers | Medium | Fixed | — | Persistence is guarded by `didPersist` and reset only on `nextCase`/`newRound`; one verdict → one record. |
+| 8 | 3-player mode left no jury voter | High | Fixed | — | `JuryRules.voters(among:)` falls back to all players when no jury exists; covered by `JuryRulesTests` (voters never empty for 2–8 players). |
+
+## v1 full build resolution - 2026-06-30
+- Deferred bugs 6–8 (logged in Task 2B review) are all fixed and covered by tests.
+- Fixed the Xcode project missing `SDKROOT = iphoneos`, which made the scheme resolve only macOS destinations.
+- Registered a `PocketPartyCourtTests` target so the existing + new tests actually run (previously reported N/A in CI).
+- Fixed the CI workflow's broken `xcodebuild` line continuation that joined `\` with `build`/`test` on one line.
+- Replaced the deprecated `NavigationLink(isActive:)` timer-advance pattern with the phase-driven `GameStore` machine.
 
 ## Deferred bugs logged from Task 2B review - 2026-06-28
 - GameSession save failures ignored via `try? modelContext.save()` in `VerdictView`; defer explicit save error UI and retry handling.
